@@ -8,12 +8,24 @@ font_directory   = script_directory
 
 # Font families and weights with paths to the font files
 fonts = {
-    'helvetica': {
-        'normal':      os.path.join(font_directory, "Helvetica/Helvetica.ttf"),
-        'bold':        os.path.join(font_directory, "Helvetica/Helvetica-Bold.ttf"),
-        'italic':      os.path.join(font_directory, "Helvetica/Helvetica-Oblique.ttf"),
-        'bold-italic': os.path.join(font_directory, "Helvetica/Helvetica-BoldOblique.ttf")
-    }
+  'helvetica': {
+    'normal':      os.path.join(font_directory, "Helvetica/Helvetica.ttf"),
+    'bold':        os.path.join(font_directory, "Helvetica/Helvetica-Bold.ttf"),
+    'italic':      os.path.join(font_directory, "Helvetica/Helvetica-Oblique.ttf"),
+    'bold-italic': os.path.join(font_directory, "Helvetica/Helvetica-BoldOblique.ttf")
+  },
+  'arial': {
+    'normal':      os.path.join(font_directory, "Arial/ARIAL.TTF"),
+    'bold':        os.path.join(font_directory, "Arial/ARIALBD.TTF"),
+    'italic':      os.path.join(font_directory, "Arial/ARIALI.TTF"),
+    'bold-italic': os.path.join(font_directory, "Arial/ARIALBI.TTF")
+  },
+  'consolas': {
+    'normal':      os.path.join(font_directory, "Consolas/Consolas.ttf"),
+    'bold':        os.path.join(font_directory, "Consolas/Consolas-Bold.ttf"),
+    'italic':      os.path.join(font_directory, "Consolas/Consolas-Italic.ttf"),
+    'bold-italic': os.path.join(font_directory, "Consolas/Consolas-ItalicBold.ttf")
+  }
 }
 
 # Font sizes to measure
@@ -83,7 +95,7 @@ try:
     # Format the font metrics data for better readability
     font_metrics_string = f"font_metrics_data = {font_metrics_data}"
     font_metrics_string = re.sub(r"\s*(\d+:)", r"\n\g<1>", font_metrics_string)
-    font_metrics_string = re.sub(r"('[a-zA-Z]\w+':)", r"\n\g<1>", font_metrics_string)
+    font_metrics_string = re.sub(r"('[a-zA-Z][a-zA-Z0-9_-]+':)", r"\n\g<1>", font_metrics_string)
     # Write the formatted font metrics data to the output file
     output_file.write(font_metrics_string)
     output_file.write("\n")
