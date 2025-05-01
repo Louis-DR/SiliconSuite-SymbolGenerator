@@ -1,3 +1,4 @@
+import re
 import argparse
 from .font_character_widths import font_character_widths
 
@@ -78,3 +79,18 @@ title_width    = get_text_width(template_variables['title'   ]['label'], font_na
 subtitle_width = get_text_width(template_variables['subtitle']['label'], font_name, fonts['subtitle']['weight'], fonts['subtitle']['size'])
 line_widths.append(title_width)
 line_widths.append(subtitle_width)
+
+# Parse the next lines for ports
+template_variables['ports'] = {'left':[], 'right':[]}
+template_variables['number_port_lines'] = 0
+empty_port = {'label':"", 'direction':"", 'width':""}
+line_re = re.compile(r"(?:([-=<>]{2,})\s+(\w+))?\s*(?:(\w+)\s+([-=<>]{2,}))?")
+while lines:
+  template_variables['number_port_lines'] += 1
+  line        = lines.pop(0).strip()
+  line_parse  = line_re.search(line)
+  line_groups = line_parse.groups()
+  left_arrow  = line_groups[0]
+  left_label  = line_groups[1]
+  right_label = line_groups[2]
+  right_arrow = line_groups[3]
