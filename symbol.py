@@ -57,3 +57,10 @@ fonts = {
 }
 template_variables['font_family'] = font_name
 template_variables['fonts']       = fonts
+
+# Get width in pixels of text with specific font
+def get_text_width(text:str, font_name:str="helvetica", font_weight:str="normal", font_size:int=6) -> int:
+  width = 0
+  for character in text:
+    width += font_character_widths[font_name][font_weight][font_size][character]
+  return int(round(width*1.1))
