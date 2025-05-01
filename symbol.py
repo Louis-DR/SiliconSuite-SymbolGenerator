@@ -125,3 +125,104 @@ while lines:
   if right_label is not None:
     line_width += get_text_width(right_label, font_name, fonts['port']['weight'], fonts['port']['size'])
   line_widths.append(line_width)
+
+# Box dimensions
+template_variables['box'] = {}
+template_variables['box']['width'] = int(
+    max(line_widths)
+  + box_padding_sides * 2
+)
+template_variables['box']['height'] = int(
+    box_padding_top
+  + title_height
+  + title_margin
+  + subtitle_height
+  + subtitle_margin
+  + ports_height * template_variables['number_port_lines']
+  + box_padding_bottom
+)
+
+# Box position
+template_variables['box']['x'] = int(
+    port_arrow_length
+  + svg_padding
+)
+template_variables['box']['y'] = int(
+    svg_padding
+)
+
+# Title
+template_variables['title']['x'] = int(
+    template_variables['box']['x']
+  + template_variables['box']['width'] / 2
+)
+template_variables['title']['y'] = int(
+    template_variables['box']['y']
+  + box_padding_top
+  + title_height / 2
+)
+template_variables['subtitle']['x'] = int(
+    template_variables['title']['x']
+)
+template_variables['subtitle']['y'] = int(
+    template_variables['title']['y']
+  + title_height / 2
+  + title_margin
+  + subtitle_height / 2
+)
+
+# Position of the arrows
+template_variables['arrows'] = {}
+template_variables['arrows']['length'] = port_arrow_length
+template_variables['arrows']['x_left'] = int(
+    template_variables['box']['x']
+)
+template_variables['arrows']['x_right'] = int(
+    template_variables['box']['x']
+  + template_variables['box']['width']
+)
+
+template_variables['arrows']['triangle'] = {}
+template_variables['arrows']['triangle']['length'] = arrow_triangle_length
+template_variables['arrows']['triangle']['height'] = arrow_triangle_height
+template_variables['arrows']['triangle']['left_path']  = f"l +{arrow_triangle_length} +{arrow_triangle_height/2} v -{arrow_triangle_height} z"
+template_variables['arrows']['triangle']['right_path'] = f"l -{arrow_triangle_length} +{arrow_triangle_height/2} v -{arrow_triangle_height} z"
+template_variables['arrows']['busline'] = {}
+template_variables['arrows']['busline']['distance'] = bus_line_distance
+template_variables['arrows']['busline']['size']     = bus_line_size
+
+# Position of the ports
+template_variables['ports']['y_start'] = int(
+    template_variables['subtitle']['y']
+  + subtitle_height / 2
+  + subtitle_margin
+)
+template_variables['ports']['x_left'] = int(
+    template_variables['box']['x']
+  + box_padding_sides
+)
+template_variables['ports']['x_right'] = int(
+    template_variables['box']['x']
+  + template_variables['box']['width']
+  - box_padding_sides
+)
+port_y = int(
+    template_variables['ports']['y_start']
+  + ports_height / 2
+)
+for port_line_index in range(template_variables['number_port_lines']):
+  template_variables['ports']['left' ][port_line_index]['y'] = port_y
+  template_variables['ports']['right'][port_line_index]['y'] = port_y
+  port_y += ports_height
+
+# SVG dimensions
+template_variables['width'] = int(
+    template_variables['box']['width']
+  + port_arrow_length * 2
+  + svg_padding * 2
+)
+template_variables['height'] = int(
+    template_variables['box']['height']
+  + svg_padding * 2
+)
+
