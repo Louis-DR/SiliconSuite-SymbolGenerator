@@ -1,5 +1,6 @@
 import re
 import argparse
+from jinja2 import Environment
 from .font_character_widths import font_character_widths
 
 # Parse command line arguments
@@ -225,4 +226,14 @@ template_variables['height'] = int(
     template_variables['box']['height']
   + svg_padding * 2
 )
+
+# Jinja2 environment
+env = Environment()
+
+svg_template_path = "symbol.svg.j2"
+with open(svg_template_path, 'r') as svg_template:
+  output_str = env.from_string(svg_template.read()).render(template_variables)
+  output_str = re.sub(r' +\n', '\n', output_str)
+  with open(svg_output_path,'w') as output_file:
+    output_file.write(output_str)
 
