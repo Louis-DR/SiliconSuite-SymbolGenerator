@@ -9,13 +9,15 @@ font_directory   = script_directory
 # Font families and weights with paths to the font files
 fonts = {
     'helvetica': {
-        'normal': os.path.join(font_directory, "Helvetica/Helvetica.ttf"),
-        'bold':   os.path.join(font_directory, "Helvetica/Helvetica-Bold.ttf")
+        'normal':      os.path.join(font_directory, "Helvetica/Helvetica.ttf"),
+        'bold':        os.path.join(font_directory, "Helvetica/Helvetica-Bold.ttf"),
+        'italic':      os.path.join(font_directory, "Helvetica/Helvetica-Oblique.ttf"),
+        'bold-italic': os.path.join(font_directory, "Helvetica/Helvetica-BoldOblique.ttf")
     }
 }
 
 # Font sizes to measure
-font_sizes = [4, 5, 6, 7, 8, 9, 10, 12, 14, 16]
+font_sizes = [4, 5, 6, 7, 8, 9, 10, 12, 14, 16, 18, 20]
 
 # Characters to measure
 characters = [
