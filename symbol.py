@@ -64,3 +64,17 @@ def get_text_width(text:str, font_name:str="helvetica", font_weight:str="normal"
   for character in text:
     width += font_character_widths[font_name][font_weight][font_size][character]
   return int(round(width*1.1))
+
+# Process the descriptor line by line
+lines = input_description.strip().split('\n')
+
+# Parse the first two lines for title and subtitle
+template_variables['title']    = {'label':lines.pop(0).strip()}
+template_variables['subtitle'] = {'label':lines.pop(0).strip()}
+
+# Width in pixels of each line of the schematic
+line_widths    = []
+title_width    = get_text_width(template_variables['title'   ]['label'], font_name, fonts['title'   ]['weight'], fonts['title'   ]['size'])
+subtitle_width = get_text_width(template_variables['subtitle']['label'], font_name, fonts['subtitle']['weight'], fonts['subtitle']['size'])
+line_widths.append(title_width)
+line_widths.append(subtitle_width)
