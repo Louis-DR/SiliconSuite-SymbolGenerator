@@ -94,3 +94,34 @@ while lines:
   left_label  = line_groups[1]
   right_label = line_groups[2]
   right_arrow = line_groups[3]
+  # Left side ports
+  if left_arrow:
+    direction = "input" if '>' in left_arrow else "output"
+    width     = "bus"   if '=' in left_arrow else "bit"
+    port = {
+      'label':     left_label,
+      'direction': direction,
+      'width':     width
+    }
+    template_variables['ports']['left'].append(port)
+  else:
+    template_variables['ports']['left'].append(empty_port)
+  # Right side ports
+  if right_arrow:
+    direction = "input" if '<' in right_arrow else "output"
+    width     = "bus"   if '=' in right_arrow else "bit"
+    port = {
+      'label':     right_label,
+      'direction': direction,
+      'width':     width
+    }
+    template_variables['ports']['right'].append(port)
+  else:
+    template_variables['ports']['right'].append(empty_port)
+  # Line width
+  line_width = ports_label_margin
+  if left_label is not None:
+    line_width += get_text_width(left_label, font_name, fonts['port']['weight'], fonts['port']['size'])
+  if right_label is not None:
+    line_width += get_text_width(right_label, font_name, fonts['port']['weight'], fonts['port']['size'])
+  line_widths.append(line_width)
