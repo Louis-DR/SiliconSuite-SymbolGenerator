@@ -2,4 +2,17 @@
   <rect x="{{box.x}}" y="{{box.y}}" width="{{box.width}}" height="{{box.height}}" fill="white" stroke="black" stroke-width="1"/>
   <text x="{{title.x}}" y="{{title.y}}" text-anchor="middle" dominant-baseline="middle" font-family="{{font_family}}" font-size="{{fonts.title.size}}" font-weight="{{fonts.title.weight}}" fill="black">{{title.label}}</text>
   <text x="{{subtitle.x}}" y="{{subtitle.y}}" text-anchor="middle" dominant-baseline="middle" font-family="{{font_family}}" font-size="{{fonts.subtitle.size}}" font-weight="{{fonts.subtitle.weight}}" fill="black">{{subtitle.label}}</text>
+  {%- for port_index in range(number_port_lines) %}
+
+    {%- set left_port = ports.left[port_index] %}
+    {%- if left_port.direction != "" %}
+      <text x="{{ports.x_left}}" y="{{left_port.y}}" text-anchor="start" dominant-baseline="middle" font-family="{{font_family}}" font-size="{{fonts.port.size}}" font-weight="{{fonts.port.weight}}" fill="black">{{left_port.label}}</text>
+    {%- endif %}
+
+    {%- set right_port = ports.right[port_index] %}
+    {%- if right_port.direction != "" %}
+      <text x="{{ports.x_right}}" y="{{right_port.y}}" text-anchor="end" dominant-baseline="middle" font-family="{{font_family}}" font-size="{{fonts.port.size}}" font-weight="{{fonts.port.weight}}" fill="black">{{right_port.label}}</text>
+    {%- endif %}
+
+  {%- endfor %}
 </svg>
