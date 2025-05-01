@@ -37,4 +37,4 @@ symbol-generator simple_buffer.sss
 
 This will create the following SVG file named `simple_buffer.svg` :
 
-![simple_buffer.svg](example/simple_buffer.svg)
+![simple_buffer.svg](https://raw.githubusercontent.com/Louis-DR/SiliconSuite-SymbolGenerator/refs/heads/master/example/simple_buffer.svg)

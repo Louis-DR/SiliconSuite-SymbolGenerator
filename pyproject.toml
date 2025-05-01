@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "siliconsuite-symbol-generator"
-version = "1.0.2"
+version = "1.0.3"
 description = "Generate symbol schematics for hardware IP cores."
 readme = "README.md"
 requires-python = ">=3.8"
@@ -26,5 +26,5 @@ symbol-generator = "symbol_generator.symbol_generator:main"
 # Explicitly include only the symbol_generator package
 [tool.setuptools.packages.find]
 where = ["."]
-include = ["symbol_generator*", "example*"]
+include = ["symbol_generator*"]
 exclude = ["tests*", "docs*"]
