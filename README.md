@@ -39,6 +39,8 @@ This will create the following SVG file named `simple_buffer.svg` :
 
 ![simple_buffer.svg](https://raw.githubusercontent.com/Louis-DR/SiliconSuite-SymbolGenerator/refs/heads/master/example/simple_buffer.svg)
 
+Note that if you view this readme in a website or application that doesn't support dark mode correctly (such as PyPI), the example diagram might not be visible. Dark mode support can be disabled when generating the diagram (see section below).
+
 ## Theme
 
 The visual appearance of the generated symbol (e.g., padding, font sizes, arrow dimensions, colors) can be customized through a YAML theme file. The tool comes with a default theme (`default_theme.yaml`) located within the package.
