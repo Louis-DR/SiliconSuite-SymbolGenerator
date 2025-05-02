@@ -109,9 +109,33 @@ def main():
 
   # Get width in pixels of text with specific font
   def get_text_width(text:str, font_name:str="helvetica", font_weight:str="normal", font_size:int=6) -> int:
+    # Check if the primary font family exists
+    if font_name not in font_character_widths:
+      print(f"WARNING: Font family '{font_name}' not found in character width data. Using estimated width based on font size.")
+      # Calculate width using the formula for all characters
+      width = len(text) * (font_size * 0.6)
+      return int(round(width * 1.1))
+
+    # Font family exists, try to get specific widths
     width = 0
+    try:
+      char_widths = font_character_widths[font_name][font_weight][font_size]
+    except KeyError:
+      # Handle missing weight/size combination for the existing font family
+      print(f"WARNING: Font configuration '{font_name}' (Weight: {font_weight}, Size: {font_size}) not found. Using estimated width based on font size.")
+      width = len(text) * (font_size * 0.6)
+      return int(round(width * 1.1))
+
+    # Font family, weight, and size combination exists, proceed character by character
     for character in text:
-      width += font_character_widths[font_name][font_weight][font_size][character]
+      char_width = char_widths.get(character)
+      if char_width is None:
+        # Handle missing character within the font data
+        print(f"WARNING: Character '{character}' not found in width data for font '{font_name}' (Weight: {font_weight}, Size: {font_size}). Using estimated width for this character.")
+        # Estimate width for the missing character (e.g., using space or formula)
+        char_width = char_widths.get(' ', font_size * 0.6)
+      width += char_width
+
     return int(round(width*1.1))
 
   # Process the descriptor line by line
