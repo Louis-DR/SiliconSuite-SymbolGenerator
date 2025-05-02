@@ -22,21 +22,21 @@ shapes:
 fonts:
   title:
     family: "Helvetica" # Font family for title
-    weight: "bold"    # Font weight for title
-    size: 8           # Font size for title
+    weight: "bold"      # Font weight for title
+    size: 8             # Font size for title
   subtitle:
     family: "Helvetica" # Font family for subtitle
-    weight: "regular" # Font weight for subtitle
-    size: 6           # Font size for subtitle
+    weight: "regular"   # Font weight for subtitle
+    size: 6             # Font size for subtitle
   port:
     family: "Helvetica" # Font family for ports
-    weight: "regular" # Font weight for ports
-    size: 6           # Font size for ports
+    weight: "regular"   # Font weight for ports
+    size: 6             # Font size for ports
 
 colors:
-  box_background: "white"
-  box_border:     "black"
-  title:          "black"
-  subtitle:       "black"
-  port_label:     "black"
-  port_arrow:     "black"
+  box_background: "white" # Background fill color of the box
+  box_border:     "black" # Border stroke color of the box
+  title:          "black" # Title text color
+  subtitle:       "black" # Subtitle text color
+  port_label:     "black" # Port label text color
+  port_arrow:     "black" # Port arrow color
