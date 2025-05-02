@@ -7,7 +7,7 @@ from jinja2 import Environment
 from symbol_generator.font_character_widths import font_character_widths
 
 # Function to recursively update a dictionary
-def update_recursive(dictionary, update):
+def update_recursive(dictionary:dict, update:dict) -> dict:
   for key, value in update.items():
     if isinstance(value, collections.abc.Mapping):
       dictionary[key] = update_recursive(dictionary.get(key, {}), value)
@@ -15,73 +15,27 @@ def update_recursive(dictionary, update):
       dictionary[key] = value
   return dictionary
 
-def main():
-
-  # Parse command line arguments
-  argparser = argparse.ArgumentParser(description='Generate the SVG symbol of a hardware component from a description file.')
-  argparser.add_argument('input_file', help='Path to the symbol description file.')
-  argparser.add_argument("--scale", "-s", dest="scale", help="Scaling factor of the SVG.", default=1, type=float)
-  argparser.add_argument("--theme", "-t", dest="theme_file", help="Path to a custom theme YAML file to override default settings.", default=None) # Default is None, load default theme first
-  argparser.add_argument("--no-dark-mode", dest="no_dark_mode", help="Disable automatic dark mode colors.", action="store_true")
-  args = argparser.parse_args()
-
+# Function to generate a single symbol SVG
+def generate_symbol(input_file_path:str, theme:dict, scale:float):
   # Read input file
   input_description = None
   try:
-    with open(args.input_file, 'r') as input_file:
+    with open(input_file_path, 'r') as input_file:
       input_description = input_file.read()
   except FileNotFoundError:
-    print(f"ERROR: Input file not found at '{args.input_file}'.")
-    exit(1)
+    print(f"ERROR: Input file not found at '{input_file_path}'. Skipping.")
+    return # Skip this file
   except Exception as exception:
-    print(f"ERROR: Failed to read input file: {exception}.")
-    exit(1)
+    print(f"ERROR: Failed to read input file '{input_file_path}': {exception}. Skipping.")
+    return # Skip this file
 
-  # Load default theme from package resources
-  default_theme = None
-  try:
-    default_theme_ref = importlib.resources.files('symbol_generator').joinpath('default_theme.yaml')
-    with importlib.resources.as_file(default_theme_ref) as default_theme_path:
-      with open(default_theme_path, 'r') as theme_file:
-        default_theme = yaml.safe_load(theme_file)
-  except FileNotFoundError:
-    print(f"ERROR: Default theme file 'default_theme.yaml' not found in package.")
-    exit(1)
-  except yaml.YAMLError as exception:
-    print(f"ERROR: Default theme file is not a valid YAML file: {exception}.")
-    exit(1)
-  except Exception as exception:
-    print(f"ERROR: Failed to load default theme file: {exception}.")
-    exit(1)
-
-  # Initialize theme with default theme
-  theme = default_theme
-
-  # Load custom theme file if provided and merge it into the default theme
-  if args.theme_file:
-    custom_theme = None
-    try:
-      with open(args.theme_file, 'r') as theme_file:
-        custom_theme = yaml.safe_load(theme_file)
-      if custom_theme:
-        theme = update_recursive(theme, custom_theme)
-    except FileNotFoundError:
-      print(f"ERROR: Custom theme file not found at '{args.theme_file}'.")
-      exit(1)
-    except yaml.YAMLError as exception:
-      print(f"ERROR: Custom theme file is not a valid YAML file: {exception}.")
-      exit(1)
-    except Exception as exception:
-      print(f"ERROR: Failed to load custom theme file: {exception}.")
-      exit(1)
-
-  # Extract parameters from the final merged theme
+  # Extract parameters from the theme
   layout_config = theme['layout']
   font_config   = theme['fonts']
   color_config  = theme['colors']
   shapes_config = theme['shapes']
 
-  # Drawing parameters (now loaded from theme)
+  # Drawing parameters
   title_height           = layout_config['title_height']
   title_margin           = layout_config['title_margin']
   subtitle_height        = layout_config['subtitle_height']
@@ -102,16 +56,15 @@ def main():
   template_variables = {}
 
   # Scale factor
-  template_variables['scale'] = float(args.scale)
+  template_variables['scale'] = scale
 
   # Colors
   template_variables['colors'] = color_config
-  template_variables['supports_dark_mode'] = not args.no_dark_mode
 
   # Shapes
   template_variables['shapes'] = shapes_config
 
-  # Font attributes (now structured per element)
+  # Font attributes
   template_variables['fonts'] = font_config
 
   # Get width in pixels of text with specific font
@@ -149,6 +102,9 @@ def main():
   lines = input_description.strip().split('\n')
 
   # Parse the first two lines for title and subtitle
+  if len(lines) < 2:
+    print(f"ERROR: Input file '{input_file_path}' must contain at least a title and subtitle line. Skipping.")
+    return # Skip this file
   template_variables['title']    = {'label':lines.pop(0).strip()}
   template_variables['subtitle'] = {'label':lines.pop(0).strip()}
 
@@ -329,22 +285,80 @@ def main():
   env = Environment()
 
   # Load template from package resources
-  template_ref = importlib.resources.files('symbol_generator').joinpath('symbol.svg.j2')
-  with importlib.resources.as_file(template_ref) as svg_template_path:
+  try:
+    template_ref = importlib.resources.files('symbol_generator').joinpath('symbol.svg.j2')
+    with importlib.resources.as_file(template_ref) as svg_template_path:
       with open(svg_template_path, 'r') as svg_template:
-          # Generate output SVG string
-          output_str = env.from_string(svg_template.read()).render(template_variables)
+        # Generate output SVG string
+        output_str = env.from_string(svg_template.read()).render(template_variables)
+        # Remove trailing whitespaces from lines
+        output_str = re.sub(r' +\n', '\n', output_str)
+        # Determine output path (e.g., same name as input but with .svg)
+        output_path = input_file_path.rsplit('.', 1)[0] + ".svg"
+        # Write output file
+        with open(output_path, 'w') as output_file:
+          output_file.write(output_str)
+        print(f"Symbol successfully generated at '{output_path}'.")
+  except FileNotFoundError:
+    print(f"ERROR: SVG template file 'symbol.svg.j2' not found in package. Cannot generate symbol for '{input_file_path}'.")
+  except Exception as exception:
+    print(f"ERROR: Failed during template processing or writing for '{input_file_path}': {exception}.")
 
-          # Remove trailing whitespaces from lines
-          output_str = re.sub(r' +\n', '\n', output_str)
+def main():
 
-          # Determine output path (e.g., same name as input but with .svg)
-          output_path = args.input_file.rsplit('.', 1)[0] + ".svg"
+  # Parse command line arguments
+  argparser = argparse.ArgumentParser(description='Generate the SVG symbol of a hardware component from a description file.')
+  argparser.add_argument('input_files', nargs='+', help='Path(s) to the symbol description file(s).') # Changed to input_files, nargs='+'
+  argparser.add_argument("--scale", "-s", dest="scale", help="Scaling factor of the SVG.", default=1, type=float)
+  argparser.add_argument("--theme", "-t", dest="theme_file", help="Path to a custom theme YAML file to override default settings.", default=None)
+  argparser.add_argument("--no-dark-mode", dest="no_dark_mode", help="Disable automatic dark mode colors.", action="store_true")
+  args = argparser.parse_args()
 
-          # Write output file
-          with open(output_path, 'w') as output_file:
-              output_file.write(output_str)
-          print(f"Symbol successfully generated at '{output_path}'.")
+  # Load default theme from package resources
+  default_theme = None
+  try:
+    default_theme_ref = importlib.resources.files('symbol_generator').joinpath('default_theme.yaml')
+    with importlib.resources.as_file(default_theme_ref) as default_theme_path:
+      with open(default_theme_path, 'r') as theme_file:
+        default_theme = yaml.safe_load(theme_file)
+  except FileNotFoundError:
+    print(f"ERROR: Default theme file 'default_theme.yaml' not found in package. Cannot proceed.")
+    exit(1)
+  except yaml.YAMLError as exception:
+    print(f"ERROR: Default theme file is not a valid YAML file: {exception}. Cannot proceed.")
+    exit(1)
+  except Exception as exception:
+    print(f"ERROR: Failed to load default theme file: {exception}. Cannot proceed.")
+    exit(1)
+
+  # Initialize theme with default theme
+  theme = default_theme
+
+  # Load custom theme file if provided and merge it into the default theme
+  if args.theme_file:
+    custom_theme = None
+    try:
+      with open(args.theme_file, 'r') as theme_file:
+        custom_theme = yaml.safe_load(theme_file)
+      if custom_theme:
+        # Make a deep copy before updating if necessary, or ensure update_recursive handles it
+        theme = update_recursive(theme.copy(), custom_theme) # Ensure default isn't modified in place if script runs long
+    except FileNotFoundError:
+      print(f"ERROR: Custom theme file not found at '{args.theme_file}'. Using default theme only.")
+      # Continue with default theme
+    except yaml.YAMLError as exception:
+      print(f"ERROR: Custom theme file is not a valid YAML file: {exception}. Using default theme only.")
+      # Continue with default theme
+    except Exception as exception:
+      print(f"ERROR: Failed to load custom theme file: {exception}. Using default theme only.")
+      # Continue with default theme
+
+  # Add dark mode support flag to the theme dictionary (or handle it within generate_symbol)
+  theme['supports_dark_mode'] = not args.no_dark_mode
+
+  # Process each input file
+  for input_file_path in args.input_files:
+    generate_symbol(input_file_path, theme, args.scale)
 
 if __name__ == "__main__":
-    main()
+  main()
