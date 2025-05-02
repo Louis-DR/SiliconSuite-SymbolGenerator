@@ -1,5 +1,5 @@
 <svg width="{{(width * scale)|int}}" height="{{(height * scale)|int}}" viewBox="0 0 {{width}} {{height}}" xmlns="http://www.w3.org/2000/svg">
-  <rect x="{{box.x}}" y="{{box.y}}" width="{{box.width}}" height="{{box.height}}" fill="{{colors.box_background}}" stroke="{{colors.box_border}}" stroke-width="1"/>
+  <rect x="{{box.x}}" y="{{box.y}}" width="{{box.width}}" height="{{box.height}}" fill="{{colors.box_background}}" stroke="{{colors.box_border}}" stroke-width="{{shapes.box_border_width}}"/>
   <text x="{{title.x}}" y="{{title.y}}" text-anchor="middle" dominant-baseline="middle" font-family="{{font_family}}" font-size="{{fonts.title.size}}" font-weight="{{fonts.title.weight}}" fill="{{colors.title}}">{{title.label}}</text>
   <text x="{{subtitle.x}}" y="{{subtitle.y}}" text-anchor="middle" dominant-baseline="middle" font-family="{{font_family}}" font-size="{{fonts.subtitle.size}}" font-weight="{{fonts.subtitle.weight}}" fill="{{colors.subtitle}}">{{subtitle.label}}</text>
   {%- for port_index in range(number_port_lines) %}
@@ -8,18 +8,18 @@
     {%- if left_port.direction != "" %}
       <text x="{{ports.x_left}}" y="{{left_port.y}}" text-anchor="start" dominant-baseline="middle" font-family="{{font_family}}" font-size="{{fonts.port.size}}" font-weight="{{fonts.port.weight}}" fill="{{colors.port_label}}">{{left_port.label}}</text>
       {%- if left_port.direction == "input" %}
-        <line x1="{{arrows.x_left - arrows.triangle.length}}" y1="{{left_port.y}}" x2="{{arrows.x_left - arrows.length}}" y2="{{left_port.y}}" stroke="{{colors.port_arrow}}" stroke-width="1"/>
+        <line x1="{{arrows.x_left - arrows.triangle.length}}" y1="{{left_port.y}}" x2="{{arrows.x_left - arrows.length}}" y2="{{left_port.y}}" stroke="{{colors.port_arrow}}" stroke-width="{{shapes.arrow_line_width}}"/>
         <path d="M {{arrows.x_left}} {{left_port.y}} {{arrows.triangle.right_path}}" fill="{{colors.port_arrow}}"/>
         {%- if left_port.width == "bus" %}
           {%- set busline_x = arrows.x_left - arrows.length + arrows.busline.distance %}
-          <line x1="{{busline_x - arrows.busline.size}}" y1="{{left_port.y - arrows.busline.size}}" x2="{{busline_x + arrows.busline.size}}" y2="{{left_port.y + arrows.busline.size}}" stroke="{{colors.port_arrow}}" stroke-width="1"/>
+          <line x1="{{busline_x - arrows.busline.size}}" y1="{{left_port.y - arrows.busline.size}}" x2="{{busline_x + arrows.busline.size}}" y2="{{left_port.y + arrows.busline.size}}" stroke="{{colors.port_arrow}}" stroke-width="{{shapes.arrow_line_width}}"/>
         {%- endif %}
       {%- else %}
-        <line x1="{{arrows.x_left}}" y1="{{left_port.y}}" x2="{{arrows.x_left - arrows.length + arrows.triangle.length}}" y2="{{left_port.y}}" stroke="{{colors.port_arrow}}" stroke-width="1"/>
+        <line x1="{{arrows.x_left}}" y1="{{left_port.y}}" x2="{{arrows.x_left - arrows.length + arrows.triangle.length}}" y2="{{left_port.y}}" stroke="{{colors.port_arrow}}" stroke-width="{{shapes.arrow_line_width}}"/>
         <path d="M {{arrows.x_left - arrows.length}} {{left_port.y}} {{arrows.triangle.left_path}}" fill="{{colors.port_arrow}}"/>
         {%- if left_port.width == "bus" %}
           {%- set busline_x = arrows.x_left - arrows.busline.distance %}
-          <line x1="{{busline_x - arrows.busline.size}}" y1="{{left_port.y - arrows.busline.size}}" x2="{{busline_x + arrows.busline.size}}" y2="{{left_port.y + arrows.busline.size}}" stroke="{{colors.port_arrow}}" stroke-width="1"/>
+          <line x1="{{busline_x - arrows.busline.size}}" y1="{{left_port.y - arrows.busline.size}}" x2="{{busline_x + arrows.busline.size}}" y2="{{left_port.y + arrows.busline.size}}" stroke="{{colors.port_arrow}}" stroke-width="{{shapes.arrow_line_width}}"/>
         {%- endif %}
       {%- endif %}
     {%- endif %}
@@ -28,18 +28,18 @@
     {%- if right_port.direction != "" %}
       <text x="{{ports.x_right}}" y="{{right_port.y}}" text-anchor="end" dominant-baseline="middle" font-family="{{font_family}}" font-size="{{fonts.port.size}}" font-weight="{{fonts.port.weight}}" fill="{{colors.port_label}}">{{right_port.label}}</text>
       {%- if left_port.direction == "input" %}
-        <line x1="{{arrows.x_right}}" y1="{{right_port.y}}" x2="{{arrows.x_right + arrows.length - arrows.triangle.length}}" y2="{{right_port.y}}" stroke="{{colors.port_arrow}}" stroke-width="1"/>
+        <line x1="{{arrows.x_right}}" y1="{{right_port.y}}" x2="{{arrows.x_right + arrows.length - arrows.triangle.length}}" y2="{{right_port.y}}" stroke="{{colors.port_arrow}}" stroke-width="{{shapes.arrow_line_width}}"/>
         <path d="M {{arrows.x_right + arrows.length}} {{left_port.y}} {{arrows.triangle.right_path}}" fill="{{colors.port_arrow}}"/>
         {%- if left_port.width == "bus" %}
           {%- set busline_x = arrows.x_right + arrows.busline.distance %}
-          <line x1="{{busline_x - arrows.busline.size}}" y1="{{left_port.y - arrows.busline.size}}" x2="{{busline_x + arrows.busline.size}}" y2="{{left_port.y + arrows.busline.size}}" stroke="{{colors.port_arrow}}" stroke-width="1"/>
+          <line x1="{{busline_x - arrows.busline.size}}" y1="{{left_port.y - arrows.busline.size}}" x2="{{busline_x + arrows.busline.size}}" y2="{{left_port.y + arrows.busline.size}}" stroke="{{colors.port_arrow}}" stroke-width="{{shapes.arrow_line_width}}"/>
         {%- endif %}
       {%- else %}
-        <line x1="{{arrows.x_right + arrows.triangle.length}}" y1="{{right_port.y}}" x2="{{arrows.x_right + arrows.length}}" y2="{{right_port.y}}" stroke="{{colors.port_arrow}}" stroke-width="1"/>
+        <line x1="{{arrows.x_right + arrows.triangle.length}}" y1="{{right_port.y}}" x2="{{arrows.x_right + arrows.length}}" y2="{{right_port.y}}" stroke="{{colors.port_arrow}}" stroke-width="{{shapes.arrow_line_width}}"/>
         <path d="M {{arrows.x_right}} {{left_port.y}} {{arrows.triangle.left_path}}" fill="{{colors.port_arrow}}"/>
         {%- if left_port.width == "bus" %}
           {%- set busline_x = arrows.x_right + arrows.length - arrows.busline.distance %}
-          <line x1="{{busline_x - arrows.busline.size}}" y1="{{left_port.y - arrows.busline.size}}" x2="{{busline_x + arrows.busline.size}}" y2="{{left_port.y + arrows.busline.size}}" stroke="{{colors.port_arrow}}" stroke-width="1"/>
+          <line x1="{{busline_x - arrows.busline.size}}" y1="{{left_port.y - arrows.busline.size}}" x2="{{busline_x + arrows.busline.size}}" y2="{{left_port.y + arrows.busline.size}}" stroke="{{colors.port_arrow}}" stroke-width="{{shapes.arrow_line_width}}"/>
         {%- endif %}
       {%- endif %}
     {%- endif %}

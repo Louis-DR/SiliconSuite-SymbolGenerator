@@ -78,6 +78,7 @@ def main():
   layout_config = theme['layout']
   font_config   = theme['font']
   color_config  = theme['colors']
+  shapes_config = theme['shapes']
 
   # Drawing parameters (now loaded from theme)
   title_height           = layout_config['title_height']
@@ -90,11 +91,11 @@ def main():
   box_padding_bottom     = layout_config['box_padding_bottom']
   box_padding_sides      = layout_config['box_padding_sides']
   port_arrow_length      = layout_config['port_arrow_length']
-  arrow_triangle_length  = layout_config['arrow_triangle_length']
-  arrow_triangle_height  = layout_config['arrow_triangle_height']
-  bus_line_distance      = layout_config['bus_line_distance']
-  bus_line_size          = layout_config['bus_line_size']
   svg_padding            = layout_config['svg_padding']
+  arrow_triangle_length  = shapes_config['arrow_triangle_length']
+  arrow_triangle_height  = shapes_config['arrow_triangle_height']
+  bus_line_distance      = shapes_config['bus_line_distance']
+  bus_line_size          = shapes_config['bus_line_size']
 
   # Variables used in the SVG template
   template_variables = {}
@@ -104,6 +105,9 @@ def main():
 
   # Colors
   template_variables['colors'] = color_config
+
+  # Shapes
+  template_variables['shapes'] = shapes_config
 
   # Font attributes
   font_name = font_config['name']

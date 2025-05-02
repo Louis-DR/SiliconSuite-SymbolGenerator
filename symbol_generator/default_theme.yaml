@@ -9,11 +9,15 @@ layout:
   box_padding_bottom:     5  # Box bottom padding
   box_padding_sides:      2  # Box sides padding
   port_arrow_length:     20  # Length of the port arrows
+  svg_padding:            5  # Padding for the top, bottom, left, and right
+
+shapes:
+  box_border_width:       1  # Width of the box border
+  arrow_line_width:       1  # Width of the arrow lines
   arrow_triangle_length:  6  # Length of the arrow triangle
   arrow_triangle_height:  4  # Height of the arrow triangle
   bus_line_distance:      5  # Distance from end of line and the angled line for buses
   bus_line_size:          2  # Distance from line to each end of the angled line for buses
-  svg_padding:            5  # Padding for the top, bottom, left, and right
 
 font:
   name: "Helvetica"     # Font family for all text
