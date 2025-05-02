@@ -45,4 +45,13 @@
     {%- endif %}
 
   {%- endfor %}
+  {%- if supports_dark_mode %}
+    <style>
+      @media (prefers-color-scheme: dark) {
+        :root {
+          filter: invert(100%) hue-rotate(180deg);
+        }
+      }
+    </style>
+  {%- endif %}
 </svg>

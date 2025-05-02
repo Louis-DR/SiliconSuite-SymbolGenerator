@@ -50,3 +50,7 @@ symbol-generator input.sss --theme path/to/your/theme.yaml
 ```
 
 Refer to the `default_theme.yaml` file in the package source for the available options and their structure.
+
+## Dark mode
+
+By default, the SVG symbol will be generated with a CSS style that automatically inverts the luminance of all colors when the SVG is viewed in dark mode. This can be disabled by passing the command-line argument `--no-dark-mode`.

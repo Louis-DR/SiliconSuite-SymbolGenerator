@@ -22,6 +22,7 @@ def main():
   argparser.add_argument('input_file', help='Path to the symbol description file.')
   argparser.add_argument("--scale", "-s", dest="scale", help="Scaling factor of the SVG.", default=1, type=float)
   argparser.add_argument("--theme", "-t", dest="theme_file", help="Path to a custom theme YAML file to override default settings.", default=None) # Default is None, load default theme first
+  argparser.add_argument("--no-dark-mode", dest="no_dark_mode", help="Disable automatic dark mode colors.", action="store_true")
   args = argparser.parse_args()
 
   # Read input file
@@ -105,6 +106,7 @@ def main():
 
   # Colors
   template_variables['colors'] = color_config
+  template_variables['supports_dark_mode'] = not args.no_dark_mode
 
   # Shapes
   template_variables['shapes'] = shapes_config

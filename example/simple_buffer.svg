@@ -34,4 +34,11 @@
       <text x="100" y="85" text-anchor="end" dominant-baseline="middle" font-family="Helvetica" font-size="6" font-weight="regular" fill="black">read_ready</text>
         <line x1="108" y1="85" x2="122" y2="85" stroke="black" stroke-width="1"/>
         <path d="M 102 85 l +6 +2.0 v -4 z" fill="black"/>
+    <style>
+      @media (prefers-color-scheme: dark) {
+        :root {
+          filter: invert(100%) hue-rotate(180deg);
+        }
+      }
+    </style>
 </svg>
