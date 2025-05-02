@@ -67,6 +67,9 @@ def generate_symbol(input_file_path:str, theme:dict, scale:float):
   # Font attributes
   template_variables['fonts'] = font_config
 
+  # Dark mode support
+  template_variables['supports_dark_mode'] = theme['supports_dark_mode']
+
   # Get width in pixels of text with specific font
   def get_text_width(text:str, font_name:str, font_weight:str="normal", font_size:int=6) -> int:
     # Check if the primary font family exists
