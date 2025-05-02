@@ -7,9 +7,10 @@ from symbol_generator.font_character_widths import font_character_widths
 def main():
 
   # Parse command line arguments
-  parser = argparse.ArgumentParser(description='Generate the SVG symbol of a hardware component from a description file.')
-  parser.add_argument('input_file', help='Path to the symbol description file.')
-  args = parser.parse_args()
+  argparser = argparse.ArgumentParser(description='Generate the SVG symbol of a hardware component from a description file.')
+  argparser.add_argument('input_file', help='Path to the symbol description file.')
+  argparser.add_argument("--scale", "-s", dest="scale", help="Scaling factor of the SVG.", default=1, type=float)
+  args = argparser.parse_args()
 
   # Read input file
   input_description = None
@@ -43,6 +44,9 @@ def main():
 
   # Variables used in the SVG template
   template_variables = {}
+
+  # Scale factor
+  template_variables['scale'] = float(args.scale)
 
   # Font attributes
   font_name = "helvetica"

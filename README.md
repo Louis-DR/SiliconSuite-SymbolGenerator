@@ -29,10 +29,10 @@ valid_ready_simple_buffer
 <- write_ready   read_ready <-
 ```
 
-To generate the symbol schematic from this descriptor file, run the following command in your terminal :
+To generate the symbol schematic from this descriptor file, run the following command in your terminal. Note that you can use the `--scale` argument to apply a scaling factor to the whole schematic. A scaling factor of 4 is recommended.
 
 ```bash
-symbol-generator simple_buffer.sss
+symbol-generator simple_buffer.sss --scale 4
 ```
 
 This will create the following SVG file named `simple_buffer.svg` :

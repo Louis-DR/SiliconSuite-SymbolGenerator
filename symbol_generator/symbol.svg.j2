@@ -1,4 +1,4 @@
-<svg width="{{width}}" height="{{height}}" xmlns="http://www.w3.org/2000/svg">
+<svg width="{{(width * scale)|int}}" height="{{(height * scale)|int}}" viewBox="0 0 {{width}} {{height}}" xmlns="http://www.w3.org/2000/svg">
   <rect x="{{box.x}}" y="{{box.y}}" width="{{box.width}}" height="{{box.height}}" fill="white" stroke="black" stroke-width="1"/>
   <text x="{{title.x}}" y="{{title.y}}" text-anchor="middle" dominant-baseline="middle" font-family="{{font_family}}" font-size="{{fonts.title.size}}" font-weight="{{fonts.title.weight}}" fill="black">{{title.label}}</text>
   <text x="{{subtitle.x}}" y="{{subtitle.y}}" text-anchor="middle" dominant-baseline="middle" font-family="{{font_family}}" font-size="{{fonts.subtitle.size}}" font-weight="{{fonts.subtitle.weight}}" fill="black">{{subtitle.label}}</text>
