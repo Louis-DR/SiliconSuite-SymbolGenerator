@@ -1,6 +1,7 @@
 import re
 import argparse
 import importlib.resources
+import yaml  # Add PyYAML import
 from jinja2 import Environment
 from symbol_generator.font_character_widths import font_character_widths
 
@@ -10,6 +11,7 @@ def main():
   argparser = argparse.ArgumentParser(description='Generate the SVG symbol of a hardware component from a description file.')
   argparser.add_argument('input_file', help='Path to the symbol description file.')
   argparser.add_argument("--scale", "-s", dest="scale", help="Scaling factor of the SVG.", default=1, type=float)
+  argparser.add_argument("--theme", "-t", dest="theme_file", help="Path to the theme YAML file.", default="symbol_generator/default_theme.yaml")
   args = argparser.parse_args()
 
   # Read input file
@@ -18,29 +20,47 @@ def main():
     with open(args.input_file, 'r') as input_file:
       input_description = input_file.read()
   except FileNotFoundError:
-    print(f"Error: Input file not found at '{args.input_file}'.")
+    print(f"ERROR: Input file not found at '{args.input_file}'.")
     exit(1)
   except Exception as exception:
-    print(f"Error reading input file: {exception}.")
+    print(f"ERROR: Failed to read input file: {exception}.")
     exit(1)
 
-  # Drawing parameters
-  title_height           = 10 # Height of the title
-  title_margin           =  0 # Bottom margin of the title
-  subtitle_height        =  8# Height of the subtitle
-  subtitle_margin        =  5 # Bottom margin of the subtitle
-  ports_height           = 10 # Height of each port line
-  ports_label_margin     = 10 # Margin between ports of either sides
-  box_padding_top        =  2 # Box top padding
-  box_padding_bottom     =  5 # Box bottom padding
-  box_padding_sides      =  2 # Box bottom padding
-  box_height_padding     = 10 # Box vertical padding
-  port_arrow_length      = 20 # Length of the port arrows
-  arrow_triangle_length  =  6 # Length of the port arrows
-  arrow_triangle_height  =  4 # Length of the port arrows
-  bus_line_distance      =  5 # Distance from end of line and the angled line
-  bus_line_size          =  2 # Distance from line to each end of the angled line
-  svg_padding            =  5 # Padding for the top, bottom, left, and right
+  # Load theme configuration from YAML file
+  theme = None
+  try:
+    with open(args.theme_file, 'r') as theme_file:
+        theme = yaml.safe_load(theme_file)
+  except FileNotFoundError:
+    print(f"ERROR: Theme file not found at '{args.theme_file}'.")
+    exit(1)
+  except yaml.YAMLError as exception:
+    print(f"ERROR: Theme file is not a valid YAML file: {exception}.")
+    exit(1)
+  except Exception as exception:
+    print(f"ERROR: Failed to load theme file: {exception}.")
+    exit(1)
+
+  # Extract parameters from config
+  layout_config = theme['layout']
+  font_config   = theme['font']
+
+  # Drawing parameters (now loaded from config)
+  title_height           = layout_config['title_height']
+  title_margin           = layout_config['title_margin']
+  subtitle_height        = layout_config['subtitle_height']
+  subtitle_margin        = layout_config['subtitle_margin']
+  ports_height           = layout_config['ports_height']
+  ports_label_margin     = layout_config['ports_label_margin']
+  box_padding_top        = layout_config['box_padding_top']
+  box_padding_bottom     = layout_config['box_padding_bottom']
+  box_padding_sides      = layout_config['box_padding_sides']
+  port_arrow_length      = layout_config['port_arrow_length']
+  arrow_triangle_length  = layout_config['arrow_triangle_length']
+  arrow_triangle_height  = layout_config['arrow_triangle_height']
+  bus_line_distance      = layout_config['bus_line_distance']
+  bus_line_size          = layout_config['bus_line_size']
+  svg_padding            = layout_config['svg_padding']
 
   # Variables used in the SVG template
   template_variables = {}
@@ -48,22 +68,9 @@ def main():
   # Scale factor
   template_variables['scale'] = float(args.scale)
 
-  # Font attributes
-  font_name = "helvetica"
-  fonts = {
-    'title': {
-      'weight': "bold",
-      'size': 8
-    },
-    'subtitle': {
-      'weight': "normal",
-      'size': 6
-    },
-    'port': {
-      'weight': "normal",
-      'size': 6
-    }
-  }
+  # Font attributes (now loaded from config)
+  font_name = font_config['name']
+  fonts     = font_config['attributes']
   template_variables['font_family'] = font_name
   template_variables['fonts']       = fonts
 

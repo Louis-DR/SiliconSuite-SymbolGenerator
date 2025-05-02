@@ -29,7 +29,7 @@ valid_ready_simple_buffer
 <- write_ready   read_ready <-
 ```
 
-To generate the symbol schematic from this descriptor file, run the following command in your terminal. Note that you can use the `--scale` argument to apply a scaling factor to the whole schematic. A scaling factor of 4 is recommended.
+To generate the symbol schematic from this descriptor file, run the following command in your terminal. Note that you can use the `--scale` argument to apply a scaling factor to the whole schematic. A scaling factor of 3 or 4 is recommended for most usecases.
 
 ```bash
 symbol-generator simple_buffer.sss --scale 4
@@ -38,3 +38,11 @@ symbol-generator simple_buffer.sss --scale 4
 This will create the following SVG file named `simple_buffer.svg` :
 
 ![simple_buffer.svg](https://raw.githubusercontent.com/Louis-DR/SiliconSuite-SymbolGenerator/refs/heads/master/example/simple_buffer.svg)
+
+## Theme
+
+The visual appearance of the generated symbol (e.g., padding, font sizes, arrow dimensions, colors) can be customized through a YAML theme file. By default, the tool uses the `default_theme.yaml` from the package installation. You can specify a different configuration file using the `--theme` or `-t` command-line argument:
+
+```bash
+symbol-generator input.sss --theme path/to/your/theme.yaml
+```
