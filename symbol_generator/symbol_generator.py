@@ -76,7 +76,7 @@ def main():
 
   # Extract parameters from the final merged theme
   layout_config = theme['layout']
-  font_config   = theme['font']
+  font_config   = theme['fonts']
   color_config  = theme['colors']
   shapes_config = theme['shapes']
 
@@ -109,14 +109,11 @@ def main():
   # Shapes
   template_variables['shapes'] = shapes_config
 
-  # Font attributes
-  font_name = font_config['name']
-  fonts     = font_config['attributes']
-  template_variables['font_family'] = font_name
-  template_variables['fonts']       = fonts
+  # Font attributes (now structured per element)
+  template_variables['fonts'] = font_config
 
   # Get width in pixels of text with specific font
-  def get_text_width(text:str, font_name:str="helvetica", font_weight:str="normal", font_size:int=6) -> int:
+  def get_text_width(text:str, font_name:str, font_weight:str="normal", font_size:int=6) -> int:
     # Check if the primary font family exists
     if font_name not in font_character_widths:
       print(f"WARNING: Font family '{font_name}' not found in character width data. Using estimated width based on font size.")
@@ -155,8 +152,18 @@ def main():
 
   # Width in pixels of each line of the schematic
   line_widths    = []
-  title_width    = get_text_width(template_variables['title'   ]['label'], font_name, fonts['title'   ]['weight'], fonts['title'   ]['size'])
-  subtitle_width = get_text_width(template_variables['subtitle']['label'], font_name, fonts['subtitle']['weight'], fonts['subtitle']['size'])
+  title_width    = get_text_width(
+                     template_variables['title']['label'],
+                     template_variables['fonts']['title']['family'],
+                     template_variables['fonts']['title']['weight'],
+                     template_variables['fonts']['title']['size']
+                   )
+  subtitle_width = get_text_width(
+                     template_variables['subtitle']['label'],
+                     template_variables['fonts']['subtitle']['family'],
+                     template_variables['fonts']['subtitle']['weight'],
+                     template_variables['fonts']['subtitle']['size']
+                   )
   line_widths.append(title_width)
   line_widths.append(subtitle_width)
 
@@ -201,9 +208,19 @@ def main():
     # Line width
     line_width = ports_label_margin
     if left_label is not None:
-      line_width += get_text_width(left_label, font_name, fonts['port']['weight'], fonts['port']['size'])
+      line_width += get_text_width(
+                      left_label,
+                      template_variables['fonts']['port']['family'],
+                      template_variables['fonts']['port']['weight'],
+                      template_variables['fonts']['port']['size']
+                    )
     if right_label is not None:
-      line_width += get_text_width(right_label, font_name, fonts['port']['weight'], fonts['port']['size'])
+      line_width += get_text_width(
+                      right_label,
+                      template_variables['fonts']['port']['family'],
+                      template_variables['fonts']['port']['weight'],
+                      template_variables['fonts']['port']['size']
+                    )
     line_widths.append(line_width)
 
   # Box dimensions
