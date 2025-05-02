@@ -1,5 +1,5 @@
 <svg width="{{(width * scale)|int}}" height="{{(height * scale)|int}}" viewBox="0 0 {{width}} {{height}}" xmlns="http://www.w3.org/2000/svg">
-  <rect x="{{box.x}}" y="{{box.y}}" width="{{box.width}}" height="{{box.height}}" fill="{{colors.box_background}}" stroke="{{colors.box_border}}" stroke-width="{{shapes.box_border_width}}"/>
+  <rect x="{{box.x}}" y="{{box.y}}" width="{{box.width}}" height="{{box.height}}" fill="{{colors.box_background}}" stroke="{{colors.box_border}}" stroke-width="{{shapes.box_border_width}}" rx="{{shapes.box_corner_radius}}"/>
   <text x="{{title.x}}" y="{{title.y}}" text-anchor="middle" dominant-baseline="middle" font-family="{{fonts.title.family}}" font-size="{{fonts.title.size}}" font-weight="{{fonts.title.weight}}" fill="{{colors.title}}">{{title.label}}</text>
   <text x="{{subtitle.x}}" y="{{subtitle.y}}" text-anchor="middle" dominant-baseline="middle" font-family="{{fonts.subtitle.family}}" font-size="{{fonts.subtitle.size}}" font-weight="{{fonts.subtitle.weight}}" fill="{{colors.subtitle}}">{{subtitle.label}}</text>
   {%- for port_index in range(number_port_lines) %}

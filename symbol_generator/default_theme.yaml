@@ -13,6 +13,7 @@ layout:
 
 shapes:
   box_border_width:       1  # Width of the box border
+  box_corner_radius:      5  # Radius of the box corners
   arrow_line_width:       1  # Width of the arrow lines
   arrow_triangle_length:  6  # Length of the arrow triangle
   arrow_triangle_height:  4  # Height of the arrow triangle
