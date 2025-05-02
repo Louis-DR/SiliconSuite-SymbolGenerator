@@ -23,10 +23,10 @@ Simple Buffer
 valid_ready_simple_buffer
 -> clock
 -> resetn
-<- empty               full ->
 => write_data     read_data =>
 -> write_valid   read_valid ->
 <- write_ready   read_ready <-
+<- empty               full ->
 ```
 
 To generate the symbol schematic from this descriptor file, run the following command in your terminal. Note that you can use the `--scale` argument to apply a scaling factor to the whole schematic. A scaling factor of 3 or 4 is recommended for most usecases.
