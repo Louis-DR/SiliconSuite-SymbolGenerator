@@ -41,8 +41,12 @@ This will create the following SVG file named `simple_buffer.svg` :
 
 ## Theme
 
-The visual appearance of the generated symbol (e.g., padding, font sizes, arrow dimensions, colors) can be customized through a YAML theme file. By default, the tool uses the `default_theme.yaml` from the package installation. You can specify a different configuration file using the `--theme` or `-t` command-line argument:
+The visual appearance of the generated symbol (e.g., padding, font sizes, arrow dimensions, colors) can be customized through a YAML theme file. The tool comes with a default theme (`default_theme.yaml`) located within the package.
+
+You can create your own theme file and specify only the settings you want to change. Any settings omitted from your custom theme file will retain their values from the default theme. Use the `--theme` or `-t` command-line argument to specify your custom theme file:
 
 ```bash
 symbol-generator input.sss --theme path/to/your/theme.yaml
 ```
+
+Refer to the `default_theme.yaml` file in the package source for the available options and their structure.

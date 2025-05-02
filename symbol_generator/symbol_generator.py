@@ -1,9 +1,19 @@
 import re
 import argparse
 import importlib.resources
-import yaml  # Add PyYAML import
+import yaml
+import collections.abc
 from jinja2 import Environment
 from symbol_generator.font_character_widths import font_character_widths
+
+# Function to recursively update a dictionary
+def update_recursive(dictionary, update):
+  for key, value in update.items():
+    if isinstance(value, collections.abc.Mapping):
+      dictionary[key] = update_recursive(dictionary.get(key, {}), value)
+    else:
+      dictionary[key] = value
+  return dictionary
 
 def main():
 
@@ -11,7 +21,7 @@ def main():
   argparser = argparse.ArgumentParser(description='Generate the SVG symbol of a hardware component from a description file.')
   argparser.add_argument('input_file', help='Path to the symbol description file.')
   argparser.add_argument("--scale", "-s", dest="scale", help="Scaling factor of the SVG.", default=1, type=float)
-  argparser.add_argument("--theme", "-t", dest="theme_file", help="Path to the theme YAML file.", default="symbol_generator/default_theme.yaml")
+  argparser.add_argument("--theme", "-t", dest="theme_file", help="Path to a custom theme YAML file to override default settings.", default=None) # Default is None, load default theme first
   args = argparser.parse_args()
 
   # Read input file
@@ -26,26 +36,49 @@ def main():
     print(f"ERROR: Failed to read input file: {exception}.")
     exit(1)
 
-  # Load theme configuration from YAML file
-  theme = None
+  # Load default theme from package resources
+  default_theme = None
   try:
-    with open(args.theme_file, 'r') as theme_file:
-        theme = yaml.safe_load(theme_file)
+    default_theme_ref = importlib.resources.files('symbol_generator').joinpath('default_theme.yaml')
+    with importlib.resources.as_file(default_theme_ref) as default_theme_path:
+      with open(default_theme_path, 'r') as theme_file:
+        default_theme = yaml.safe_load(theme_file)
   except FileNotFoundError:
-    print(f"ERROR: Theme file not found at '{args.theme_file}'.")
+    print(f"ERROR: Default theme file 'default_theme.yaml' not found in package.")
     exit(1)
   except yaml.YAMLError as exception:
-    print(f"ERROR: Theme file is not a valid YAML file: {exception}.")
+    print(f"ERROR: Default theme file is not a valid YAML file: {exception}.")
     exit(1)
   except Exception as exception:
-    print(f"ERROR: Failed to load theme file: {exception}.")
+    print(f"ERROR: Failed to load default theme file: {exception}.")
     exit(1)
 
-  # Extract parameters from config
+  # Initialize theme with default theme
+  theme = default_theme
+
+  # Load custom theme file if provided and merge it into the default theme
+  if args.theme_file:
+    custom_theme = None
+    try:
+      with open(args.theme_file, 'r') as theme_file:
+        custom_theme = yaml.safe_load(theme_file)
+      if custom_theme:
+        theme = update_recursive(theme, custom_theme)
+    except FileNotFoundError:
+      print(f"ERROR: Custom theme file not found at '{args.theme_file}'.")
+      exit(1)
+    except yaml.YAMLError as exception:
+      print(f"ERROR: Custom theme file is not a valid YAML file: {exception}.")
+      exit(1)
+    except Exception as exception:
+      print(f"ERROR: Failed to load custom theme file: {exception}.")
+      exit(1)
+
+  # Extract parameters from the final merged theme
   layout_config = theme['layout']
   font_config   = theme['font']
 
-  # Drawing parameters (now loaded from config)
+  # Drawing parameters (now loaded from theme)
   title_height           = layout_config['title_height']
   title_margin           = layout_config['title_margin']
   subtitle_height        = layout_config['subtitle_height']
@@ -68,7 +101,7 @@ def main():
   # Scale factor
   template_variables['scale'] = float(args.scale)
 
-  # Font attributes (now loaded from config)
+  # Font attributes (now loaded from theme)
   font_name = font_config['name']
   fonts     = font_config['attributes']
   template_variables['font_family'] = font_name

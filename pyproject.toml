@@ -29,3 +29,6 @@ symbol-generator = "symbol_generator.symbol_generator:main"
 where = ["."]
 include = ["symbol_generator*"]
 exclude = ["tests*", "docs*"]
+
+[tool.setuptools.package-data]
+symbol_generator = ["*.yaml", "*.j2"]
