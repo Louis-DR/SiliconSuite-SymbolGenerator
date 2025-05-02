@@ -16,14 +16,14 @@ layout:
   svg_padding:            5  # Padding for the top, bottom, left, and right
 
 font:
-  name: "helvetica"     # Font family for all text
+  name: "Helvetica"     # Font family for all text
   attributes:
     title:
       weight: "bold"    # Font weight for title
       size: 8           # Font size for title
     subtitle:
-      weight: "normal"  # Font weight for subtitle
+      weight: "regular" # Font weight for subtitle
       size: 6           # Font size for subtitle
     port:
-      weight: "normal"  # Font weight for ports
+      weight: "regular" # Font weight for ports
       size: 6           # Font size for ports
