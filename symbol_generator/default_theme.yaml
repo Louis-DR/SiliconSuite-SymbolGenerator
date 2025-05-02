@@ -27,3 +27,11 @@ font:
     port:
       weight: "regular" # Font weight for ports
       size: 6           # Font size for ports
+
+colors:
+  box_background: "white"
+  box_border:     "black"
+  title:          "black"
+  subtitle:       "black"
+  port_label:     "black"
+  port_arrow:     "black"

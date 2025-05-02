@@ -77,6 +77,7 @@ def main():
   # Extract parameters from the final merged theme
   layout_config = theme['layout']
   font_config   = theme['font']
+  color_config  = theme['colors']
 
   # Drawing parameters (now loaded from theme)
   title_height           = layout_config['title_height']
@@ -101,7 +102,10 @@ def main():
   # Scale factor
   template_variables['scale'] = float(args.scale)
 
-  # Font attributes (now loaded from theme)
+  # Colors
+  template_variables['colors'] = color_config
+
+  # Font attributes
   font_name = font_config['name']
   fonts     = font_config['attributes']
   template_variables['font_family'] = font_name
