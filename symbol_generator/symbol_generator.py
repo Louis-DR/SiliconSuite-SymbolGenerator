@@ -315,6 +315,7 @@ def main():
   argparser.add_argument("--scale", "-s", dest="scale", help="Scaling factor of the SVG.", default=1, type=float)
   argparser.add_argument("--theme", "-t", dest="theme_file", help="Path to a custom theme YAML file to override default settings.", default=None)
   argparser.add_argument("--no-dark-mode", dest="no_dark_mode", help="Disable automatic dark mode colors.", action="store_true")
+  argparser.add_argument("--no-background", dest="no_background", help="Make the box background transparent.", action="store_true")
   args = argparser.parse_args()
 
   # Load default theme from package resources
@@ -358,6 +359,10 @@ def main():
 
   # Add dark mode support flag to the theme dictionary (or handle it within generate_symbol)
   theme['supports_dark_mode'] = not args.no_dark_mode
+
+  # Add background support flag to the theme dictionary
+  if args.no_background:
+    theme['colors']['box_background'] = 'none'
 
   # Process each input file
   for input_file_path in args.input_files:

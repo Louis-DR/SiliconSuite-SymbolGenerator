@@ -58,3 +58,7 @@ Refer to the `default_theme.yaml` file in the package source for the available o
 ## Dark mode
 
 By default, the SVG symbol will be generated with a CSS style that automatically inverts the luminance of all colors when the SVG is viewed in dark mode. This can be disabled by passing the command-line argument `--no-dark-mode`.
+
+## Transparent background
+
+For certain applications, it is desirable that the background of the box be transparent. The command-line argument `--no-background` overrides the theme and sets the box background to transparent.
