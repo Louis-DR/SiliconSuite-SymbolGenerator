@@ -2,9 +2,19 @@ import re
 import argparse
 import importlib.resources
 import yaml
+import math
 import collections.abc
 from j2gpp import J2GPP
 from symbol_generator.font_character_widths import font_character_widths
+
+
+
+# Custom floor and ceiling functions with support for base
+def floor(x, base=1):
+  return round(base * math.floor(float(x)/base))
+def ceil(x, base=1):
+  return round(base * math.ceil(float(x)/base))
+
 
 # Function to recursively update a dictionary
 def update_recursive(dictionary:dict, update:dict) -> dict:
@@ -42,6 +52,8 @@ def generate_symbol(input_file_path:str, theme:dict, scale:float):
   subtitle_margin        = layout_config['subtitle_margin']
   ports_height           = layout_config['ports_height']
   ports_label_margin     = layout_config['ports_label_margin']
+  box_width_quanta       = layout_config['box_width_quanta']
+  box_height_quanta      = layout_config['box_height_quanta']
   box_padding_top        = layout_config['box_padding_top']
   box_padding_bottom     = layout_config['box_padding_bottom']
   box_padding_sides      = layout_config['box_padding_sides']
@@ -186,11 +198,11 @@ def generate_symbol(input_file_path:str, theme:dict, scale:float):
 
   # Box dimensions
   template_variables['box'] = {}
-  template_variables['box']['width'] = int(
+  template_variables['box']['width'] = ceil(int(
       max(line_widths)
     + box_padding_sides * 2
-  )
-  template_variables['box']['height'] = int(
+  ), box_width_quanta)
+  template_variables['box']['height'] = ceil(int(
       box_padding_top
     + title_height
     + title_margin
@@ -198,7 +210,7 @@ def generate_symbol(input_file_path:str, theme:dict, scale:float):
     + subtitle_margin
     + ports_height * template_variables['number_port_lines']
     + box_padding_bottom
-  )
+  ), box_height_quanta)
 
   # Box position
   template_variables['box']['x'] = int(

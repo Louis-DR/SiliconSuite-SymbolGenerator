@@ -5,6 +5,8 @@ layout:
   subtitle_margin:        5  # Bottom margin of the subtitle
   ports_height:          10  # Height of each port line
   ports_label_margin:    10  # Margin between ports of either sides
+  box_width_quanta:       1  # Multiple of which the box width must be
+  box_height_quanta:      1  # Multiple of which the box height must be
   box_padding_top:        2  # Box top padding
   box_padding_bottom:     5  # Box bottom padding
   box_padding_sides:      2  # Box sides padding
