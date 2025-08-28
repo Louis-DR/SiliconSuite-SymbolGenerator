@@ -43,3 +43,10 @@ colors:
   subtitle:       "black" # Subtitle text color
   port_label:     "black" # Port label text color
   port_arrow:     "black" # Port arrow color
+
+drawio:
+  layout:
+    box_width_quanta:    10
+    box_height_quanta:   10
+    port_arrow_length:   15
+    image_padding:        0

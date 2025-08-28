@@ -1,0 +1,209 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/26.1.1 Chrome/132.0.6834.210 Electron/34.3.3 Safari/537.36" version="26.1.1">
+  <diagram name="{{title.label}}" id="{{title.label|kebab}}">
+    <mxGraphModel dx         = "0"
+                  dy         = "0"
+                  grid       = "1"
+                  gridSize   = "10"
+                  guides     = "1"
+                  tooltips   = "1"
+                  connect    = "1"
+                  arrows     = "1"
+                  fold       = "1"
+                  page       = "1"
+                  pageScale  = "1"
+                  pageWidth  = "{{width}}"
+                  pageHeight = "{{height}}"
+                  math       = "0"
+                  shadow     = "0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id          = "2"
+                parent      = "1"
+                value       = ""
+                vertex      = "1"
+                connectable = "0"
+                style       = "group;                                    {#- -#}
+                               connectable=1;                            {#- -#}
+                               points=[                                  {#- -#}
+                                        [0,0,0,{{box.x}},{{box.y}}],     {#- -#}
+                                        [0,0,0,{{box.x+10}},{{box.y}}],  {#- -#}
+                                        [0,0,0,{{box.x}},{{box.y+10}}],  {#- -#}
+
+                                        [1,0,0,-{{box.x}},{{box.y}}],    {#- -#}
+                                        [1,0,0,-{{box.x+10}},{{box.y}}], {#- -#}
+                                        [1,0,0,-{{box.x}},{{box.y+10}}], {#- -#}
+
+                                        {%- for port_index in range(number_port_lines) -%}
+                                          {%- set left_port = ports.left[port_index] -%}
+                                          {%- if left_port.direction != "" -%}
+                                            [0,0,0,0,{{left_port.y}}],
+                                          {%- endif -%}
+                                          {%- set right_port = ports.right[port_index] -%}
+                                          {%- if right_port.direction != "" -%}
+                                            [1,0,0,0,{{right_port.y}}],
+                                          {%- endif -%}
+                                        {%- endfor -%}
+
+                                        [0.5,0,0,0,{{box.y}}],           {#- -#}
+                                        [0.5,0,0,0,{{box.y+box.height}}] {#- -#}
+                                      ];">
+          <mxGeometry width  = "{{width}}"
+                      height = "{{height}}"
+                      as     = "geometry"/>
+        </mxCell>
+        <mxCell id     = "box"
+                parent = "2"
+                value  = ""
+                vertex = "1"
+                style  = "rounded={% if shapes.box_corner_radius==0 %}0{%else%}1{%endif%}; {#- -#}
+                          arcSize={{shapes.box_corner_radius}};                            {#- -#}
+                          whiteSpace=wrap;                                                 {#- -#}
+                          html=1;                                                          {#- -#}
+                          connectable=0;">
+          <mxGeometry x="{{box.x}}"
+                      y="{{box.y}}"
+                      width="{{box.width}}"
+                      height="{{box.height}}"
+                      as="geometry"/>
+        </mxCell>
+        <mxCell id     = "title"
+                parent = "2"
+                value  = "{{title.label}}"
+                vertex = "1"
+                style  = "text;                          {#- -#}
+                          html=1;                        {#- -#}
+                          align=center;                  {#- -#}
+                          verticalAlign=middle;          {#- -#}
+                          whiteSpace=wrap;               {#- -#}
+                          rounded=0;                     {#- -#}
+                          fontSize={{fonts.title.size}}; {#- -#}
+                          fontStyle=1;                   {#- -#}
+                          connectable=0;">
+          <mxGeometry x      = "{{box.x}}"
+                      y      = "{{title.y}}"
+                      width  = "{{box.width}}"
+                      height = "0"
+                      as     = "geometry"/>
+        </mxCell>
+        <mxCell id     = "subtitle"
+                parent = "2"
+                value  = "{{subtitle.label}}"
+                vertex = "1"
+                style  = "text;                             {#- -#}
+                          html=1;                           {#- -#}
+                          align=center;                     {#- -#}
+                          verticalAlign=middle;             {#- -#}
+                          whiteSpace=wrap;                  {#- -#}
+                          rounded=0;                        {#- -#}
+                          fontSize={{fonts.subtitle.size}}; {#- -#}
+                          connectable=0;">
+          <mxGeometry x      = "{{box.x}}"
+                      y      = "{{subtitle.y}}"
+                      width  = "{{box.width}}"
+                      height = "0"
+                      as     = "geometry"/>
+        </mxCell>
+        {%- for port_index in range(number_port_lines) %}
+
+          {%- set left_port = ports.left[port_index] %}
+          {%- if left_port.direction != "" %}
+            <mxCell id     = "{{left_port.label}}-label"
+                    parent = "2"
+                    value  = "{{left_port.label}}"
+                    vertex = "1"
+                    style  = "text;                         {#- -#}
+                              html=1;                       {#- -#}
+                              align=left;                   {#- -#}
+                              verticalAlign=middle;         {#- -#}
+                              whiteSpace=wrap;              {#- -#}
+                              rounded=0;                    {#- -#}
+                              fontSize={{fonts.port.size}}; {#- -#}
+                              connectable=0;">
+              <mxGeometry
+                x      = "{{box.x}}"
+                y      = "{{left_port.y}}"
+                width  = "{{box.width}}"
+                height = "0"
+                as     = "geometry"/>
+            </mxCell>
+            <mxCell id     = "{{left_port.label}}-arrow"
+                    parent = "2"
+                    value  = ""
+                    edge   = "1"
+                    style  = "html=1;                                                                         {#- -#}
+                              rounded=1;                                                                      {#- -#}
+                              startFill=0;                                                                    {#- -#}
+                              startSize=2;                                                                    {#- -#}
+                              startArrow={% if left_port.width == "bus" %}dash{%else%}none{%endif%};          {#- -#}
+                              endFill=1;                                                                      {#- -#}
+                              endSize=2;                                                                      {#- -#}
+                              endArrow={% if left_port.direction == "input" %}blockThin{%else%}none{%endif%}; {#- -#}
+                              sourcePerimeterSpacing=0;">
+              <mxGeometry width    = "50"
+                          height   = "50"
+                          relative = "1"
+                          as       = "geometry">
+                <mxPoint x  = "{{arrows.x_left - arrows.length}}"
+                         y  = "{{left_port.y}}"
+                         as = "sourcePoint"/>
+                <mxPoint x  = "{{arrows.x_left}}"
+                         y  = "{{left_port.y}}"
+                         as = "targetPoint"/>
+              </mxGeometry>
+            </mxCell>
+          {%- endif %}
+
+          {%- set right_port = ports.right[port_index] %}
+          {%- if right_port.direction != "" %}
+            <mxCell id="{{right_port.label}}-label"
+                    parent="2"
+                    value="{{right_port.label}}"
+                    vertex="1"
+                    style="text;                         {#- -#}
+                           html=1;                       {#- -#}
+                           align=right;                  {#- -#}
+                           verticalAlign=middle;         {#- -#}
+                           whiteSpace=wrap;              {#- -#}
+                           rounded=0;                    {#- -#}
+                           fontSize={{fonts.port.size}}; {#- -#}
+                           connectable=0;">
+              <mxGeometry
+                x      = "{{box.x}}"
+                y      = "{{right_port.y}}"
+                width  = "{{box.width}}"
+                height = "0"
+                as     = "geometry"/>
+            </mxCell>
+            <mxCell id     = "{{right_port.label}}-arrow"
+                    parent = "2"
+                    value  = ""
+                    edge   = "1"
+                    style  = "html=1;                                                                          {#- -#}
+                              rounded=1;                                                                       {#- -#}
+                              startFill=0;                                                                     {#- -#}
+                              startSize=2;                                                                     {#- -#}
+                              startArrow={% if right_port.width == "bus" %}dash{%else%}none{%endif%};          {#- -#}
+                              endFill=1;                                                                       {#- -#}
+                              endSize=2;                                                                       {#- -#}
+                              endArrow={% if right_port.direction == "input" %}blockThin{%else%}none{%endif%}; {#- -#}
+                              sourcePerimeterSpacing=0;">
+              <mxGeometry width    = "50"
+                          height   = "50"
+                          relative = "1"
+                          as       = "geometry">
+                <mxPoint x  = "{{arrows.x_right + arrows.length}}"
+                         y  = "{{right_port.y}}"
+                         as = "sourcePoint"/>
+                <mxPoint x  = "{{arrows.x_right}}"
+                         y  = "{{right_port.y}}"
+                         as = "targetPoint"/>
+              </mxGeometry>
+            </mxCell>
+          {%- endif %}
+
+        {%- endfor %}
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
