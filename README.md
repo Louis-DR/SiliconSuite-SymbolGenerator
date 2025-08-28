@@ -43,6 +43,10 @@ Note that if you view this readme in a website or application that doesn't suppo
 
 If multiple files are provided (with a list or a wildcard pattern), each descriptor will be processed individually and rendered in the corresponding location.
 
+The tool also generates a DrawIO symbol that differs slightly from the SVG :
+
+![simple_buffer.drawio.svg](https://raw.githubusercontent.com/Louis-DR/SiliconSuite-SymbolGenerator/refs/heads/master/example/simple_buffer.drawio.svg)
+
 ## Theme
 
 The visual appearance of the generated symbol (e.g., padding, font sizes, arrow dimensions, colors) can be customized through a YAML theme file. The tool comes with a default theme (`default_theme.yaml`) located within the package.
@@ -52,6 +56,8 @@ You can create your own theme file and specify only the settings you want to cha
 ```bash
 symbol-generator input.sss --theme path/to/your/theme.yaml
 ```
+
+The theme file can also contain target specific attributes that overwrite the root ones by putting them in a `svg:` or `drawio:` section.
 
 Refer to the `default_theme.yaml` file in the package source for the available options and their structure.
 
