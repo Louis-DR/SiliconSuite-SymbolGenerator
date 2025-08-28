@@ -4,6 +4,7 @@ import importlib.resources
 import yaml
 import math
 import collections.abc
+import copy
 from j2gpp import J2GPP
 from symbol_generator.font_character_widths import font_character_widths
 
@@ -61,15 +62,6 @@ def generate_symbol(input_file_path:str, theme:dict, scale:float, target:dict):
   font_config   = theme['fonts']
   color_config  = theme['colors']
   shapes_config = theme['shapes']
-
-  # Extract the target-specific config
-  theme_section = target['theme_section']
-  if theme_section in theme:
-    target_config = theme[theme_section]
-    if 'layout' in target_config: layout_config .update( target_config['layout'] )
-    if 'fonts'  in target_config: font_config   .update( target_config['fonts']  )
-    if 'colors' in target_config: color_config  .update( target_config['colors'] )
-    if 'shapes' in target_config: shapes_config .update( target_config['shapes'] )
 
   # Drawing parameters
   title_height           = layout_config['title_height']
@@ -345,16 +337,7 @@ def generate_symbol(input_file_path:str, theme:dict, scale:float, target:dict):
 
 
 
-def main():
-  # Parse command line arguments
-  argparser = argparse.ArgumentParser(description='Generate the SVG symbol of a hardware component from a description file.')
-  argparser.add_argument('input_files', nargs='+', help='Path(s) to the symbol description file(s).') # Changed to input_files, nargs='+'
-  argparser.add_argument("--scale", "-s", dest="scale", help="Scaling factor of the SVG.", default=1, type=float)
-  argparser.add_argument("--theme", "-t", dest="theme_file", help="Path to a custom theme YAML file to override default settings.", default=None)
-  argparser.add_argument("--no-dark-mode", dest="no_dark_mode", help="Disable automatic dark mode colors.", action="store_true")
-  argparser.add_argument("--no-background", dest="no_background", help="Make the box background transparent.", action="store_true")
-  args = argparser.parse_args()
-
+def load_and_prepare_themes(args):
   # Load default theme from package resources
   default_theme = None
   try:
@@ -373,7 +356,7 @@ def main():
     exit(1)
 
   # Initialize theme with default theme
-  theme = default_theme
+  base_theme = default_theme
 
   # Load custom theme file if provided and merge it into the default theme
   if args.theme_file:
@@ -382,29 +365,57 @@ def main():
       with open(args.theme_file, 'r') as theme_file:
         custom_theme = yaml.safe_load(theme_file)
       if custom_theme:
-        # Make a deep copy before updating if necessary, or ensure update_recursive handles it
-        theme = update_recursive(theme.copy(), custom_theme) # Ensure default isn't modified in place if script runs long
+        base_theme = update_recursive(base_theme.copy(), custom_theme)
     except FileNotFoundError:
       print(f"ERROR: Custom theme file not found at '{args.theme_file}'. Using default theme only.")
-      # Continue with default theme
     except yaml.YAMLError as exception:
       print(f"ERROR: Custom theme file is not a valid YAML file: {exception}. Using default theme only.")
-      # Continue with default theme
     except Exception as exception:
       print(f"ERROR: Failed to load custom theme file: {exception}. Using default theme only.")
-      # Continue with default theme
 
-  # Add dark mode support flag to the theme dictionary (or handle it within generate_symbol)
-  theme['supports_dark_mode'] = not args.no_dark_mode
+  # Add dark mode support flag to the theme dictionary
+  base_theme['supports_dark_mode'] = not args.no_dark_mode
 
   # Add background support flag to the theme dictionary
   if args.no_background:
-    theme['colors']['box_background'] = 'none'
+    base_theme['colors']['box_background'] = 'none'
+
+  # Prepare a theme for each target
+  prepared_themes = {}
+  for target in targets:
+    theme_section = target['theme_section']
+    # Make a deep copy of the theme to avoid modifying the original during target-specific updates
+    target_theme = copy.deepcopy(base_theme)
+    if theme_section in target_theme:
+      target_config = target_theme[theme_section]
+      if 'layout' in target_config: target_theme['layout'].update(target_config['layout'])
+      if 'fonts'  in target_config: target_theme['fonts'].update(target_config['fonts'])
+      if 'colors' in target_config: target_theme['colors'].update(target_config['colors'])
+      if 'shapes' in target_config: target_theme['shapes'].update(target_config['shapes'])
+    prepared_themes[theme_section] = target_theme
+  return prepared_themes
+
+
+
+def main():
+  # Parse command line arguments
+  argparser = argparse.ArgumentParser(description='Generate the SVG symbol of a hardware component from a description file.')
+  argparser.add_argument('input_files', nargs='+', help='Path(s) to the symbol description file(s).') # Changed to input_files, nargs='+'
+  argparser.add_argument("--scale", "-s", dest="scale", help="Scaling factor of the SVG.", default=1, type=float)
+  argparser.add_argument("--theme", "-t", dest="theme_file", help="Path to a custom theme YAML file to override default settings.", default=None)
+  argparser.add_argument("--no-dark-mode", dest="no_dark_mode", help="Disable automatic dark mode colors.", action="store_true")
+  argparser.add_argument("--no-background", dest="no_background", help="Make the box background transparent.", action="store_true")
+  args = argparser.parse_args()
+
+  # Load and prepare themes for all targets
+  prepared_themes = load_and_prepare_themes(args)
 
   # Process each input file
   for input_file_path in args.input_files:
     for target in targets:
-      generate_symbol(input_file_path, theme, args.scale, target)
+      theme_section = target['theme_section']
+      target_theme = prepared_themes[theme_section]
+      generate_symbol(input_file_path, target_theme, args.scale, target)
 
 if __name__ == "__main__":
   main()
