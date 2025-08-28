@@ -58,6 +58,9 @@
                 vertex = "1"
                 style  = "rounded={% if shapes.box_corner_radius==0 %}0{%else%}1{%endif%}; {#- -#}
                           arcSize={{shapes.box_corner_radius}};                            {#- -#}
+                          fillColor={{colors.box_background}};                             {#- -#}
+                          strokeWidth={{shapes.box_border_width}};                         {#- -#}
+                          strokeColor={{colors.box_border}};                               {#- -#}
                           whiteSpace=wrap;                                                 {#- -#}
                           html=1;                                                          {#- -#}
                           connectable=0;">
@@ -71,14 +74,15 @@
                 parent = "2"
                 value  = "{{title.label}}"
                 vertex = "1"
-                style  = "text;                          {#- -#}
-                          html=1;                        {#- -#}
-                          align=center;                  {#- -#}
-                          verticalAlign=middle;          {#- -#}
-                          whiteSpace=wrap;               {#- -#}
-                          rounded=0;                     {#- -#}
-                          fontSize={{fonts.title.size}}; {#- -#}
-                          fontStyle=1;                   {#- -#}
+                style  = "text;                                                             {#- -#}
+                          html=1;                                                           {#- -#}
+                          align=center;                                                     {#- -#}
+                          verticalAlign=middle;                                             {#- -#}
+                          whiteSpace=wrap;                                                  {#- -#}
+                          rounded=0;                                                        {#- -#}
+                          fontSize={{fonts.title.size}};                                    {#- -#}
+                          fontStyle={% if fonts.title.weight=="bold" %}1{%else%}0{%endif%}; {#- -#}
+                          fontColor={{colors.title}};                                       {#- -#}
                           connectable=0;">
           <mxGeometry x      = "{{box.x}}"
                       y      = "{{title.y}}"
@@ -90,13 +94,15 @@
                 parent = "2"
                 value  = "{{subtitle.label}}"
                 vertex = "1"
-                style  = "text;                             {#- -#}
-                          html=1;                           {#- -#}
-                          align=center;                     {#- -#}
-                          verticalAlign=middle;             {#- -#}
-                          whiteSpace=wrap;                  {#- -#}
-                          rounded=0;                        {#- -#}
-                          fontSize={{fonts.subtitle.size}}; {#- -#}
+                style  = "text;                                                                {#- -#}
+                          html=1;                                                              {#- -#}
+                          align=center;                                                        {#- -#}
+                          verticalAlign=middle;                                                {#- -#}
+                          whiteSpace=wrap;                                                     {#- -#}
+                          rounded=0;                                                           {#- -#}
+                          fontSize={{fonts.subtitle.size}};                                    {#- -#}
+                          fontStyle={% if fonts.subtitle.weight=="bold" %}1{%else%}0{%endif%}; {#- -#}
+                          fontColor={{colors.title}};                                          {#- -#}
                           connectable=0;">
           <mxGeometry x      = "{{box.x}}"
                       y      = "{{subtitle.y}}"
@@ -112,13 +118,15 @@
                     parent = "2"
                     value  = "{{left_port.label}}"
                     vertex = "1"
-                    style  = "text;                         {#- -#}
-                              html=1;                       {#- -#}
-                              align=left;                   {#- -#}
-                              verticalAlign=middle;         {#- -#}
-                              whiteSpace=wrap;              {#- -#}
-                              rounded=0;                    {#- -#}
-                              fontSize={{fonts.port.size}}; {#- -#}
+                    style  = "text;                                                            {#- -#}
+                              html=1;                                                          {#- -#}
+                              align=left;                                                      {#- -#}
+                              verticalAlign=middle;                                            {#- -#}
+                              whiteSpace=wrap;                                                 {#- -#}
+                              rounded=0;                                                       {#- -#}
+                              fontSize={{fonts.port.size}};                                    {#- -#}
+                              fontStyle={% if fonts.port.weight=="bold" %}1{%else%}0{%endif%}; {#- -#}
+                              fontColor={{colors.port_label}};                                 {#- -#}
                               connectable=0;">
               <mxGeometry
                 x      = "{{box.x}}"
@@ -133,6 +141,8 @@
                     edge   = "1"
                     style  = "html=1;                                                                         {#- -#}
                               rounded=1;                                                                      {#- -#}
+                              strokeWidth={{shapes.arrow_line_width}};                                        {#- -#}
+                              strokeColor={{colors.port_arrow}};                                              {#- -#}
                               startFill=0;                                                                    {#- -#}
                               startSize=2;                                                                    {#- -#}
                               startArrow={% if left_port.width == "bus" %}dash{%else%}none{%endif%};          {#- -#}
@@ -160,13 +170,15 @@
                     parent="2"
                     value="{{right_port.label}}"
                     vertex="1"
-                    style="text;                         {#- -#}
-                           html=1;                       {#- -#}
-                           align=right;                  {#- -#}
-                           verticalAlign=middle;         {#- -#}
-                           whiteSpace=wrap;              {#- -#}
-                           rounded=0;                    {#- -#}
-                           fontSize={{fonts.port.size}}; {#- -#}
+                    style="text;                                                            {#- -#}
+                           html=1;                                                          {#- -#}
+                           align=right;                                                     {#- -#}
+                           verticalAlign=middle;                                            {#- -#}
+                           whiteSpace=wrap;                                                 {#- -#}
+                           rounded=0;                                                       {#- -#}
+                           fontSize={{fonts.port.size}};                                    {#- -#}
+                           fontStyle={% if fonts.port.weight=="bold" %}1{%else%}0{%endif%}; {#- -#}
+                           fontColor={{colors.port_label}};                                 {#- -#}
                            connectable=0;">
               <mxGeometry
                 x      = "{{box.x}}"
@@ -181,6 +193,8 @@
                     edge   = "1"
                     style  = "html=1;                                                                          {#- -#}
                               rounded=1;                                                                       {#- -#}
+                              strokeWidth={{shapes.arrow_line_width}};                                        {#- -#}
+                              strokeColor={{colors.port_arrow}};                                              {#- -#}
                               startFill=0;                                                                     {#- -#}
                               startSize=2;                                                                     {#- -#}
                               startArrow={% if right_port.width == "bus" %}dash{%else%}none{%endif%};          {#- -#}

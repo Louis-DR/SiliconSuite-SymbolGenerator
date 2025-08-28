@@ -32,7 +32,7 @@
                 parent = "2"
                 value  = ""
                 vertex = "1"
-                style  = "rounded=1;arcSize=5;whiteSpace=wrap;html=1;connectable=0;">
+                style  = "rounded=1;arcSize=5;fillColor=white;strokeWidth=1;strokeColor=black;whiteSpace=wrap;html=1;connectable=0;">
           <mxGeometry x="15"
                       y="0"
                       width="80"
@@ -43,7 +43,7 @@
                 parent = "2"
                 value  = "Simple Buffer"
                 vertex = "1"
-                style  = "text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=8;fontStyle=1;connectable=0;">
+                style  = "text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=8;fontStyle=1;fontColor=black;connectable=0;">
           <mxGeometry x      = "15"
                       y      = "7"
                       width  = "80"
@@ -54,7 +54,7 @@
                 parent = "2"
                 value  = "valid_ready_simple_buffer"
                 vertex = "1"
-                style  = "text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=6;connectable=0;">
+                style  = "text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=6;fontStyle=0;fontColor=black;connectable=0;">
           <mxGeometry x      = "15"
                       y      = "16"
                       width  = "80"
@@ -65,7 +65,7 @@
                     parent = "2"
                     value  = "clock"
                     vertex = "1"
-                    style  = "text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=6;connectable=0;">
+                    style  = "text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=6;fontStyle=0;fontColor=black;connectable=0;">
               <mxGeometry
                 x      = "15"
                 y      = "30"
@@ -77,7 +77,7 @@
                     parent = "2"
                     value  = ""
                     edge   = "1"
-                    style  = "html=1;rounded=1;startFill=0;startSize=2;startArrow=none;endFill=1;endSize=2;endArrow=blockThin;sourcePerimeterSpacing=0;">
+                    style  = "html=1;rounded=1;strokeWidth=1;strokeColor=black;startFill=0;startSize=2;startArrow=none;endFill=1;endSize=2;endArrow=blockThin;sourcePerimeterSpacing=0;">
               <mxGeometry width    = "50"
                           height   = "50"
                           relative = "1"
@@ -94,7 +94,7 @@
                     parent = "2"
                     value  = "resetn"
                     vertex = "1"
-                    style  = "text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=6;connectable=0;">
+                    style  = "text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=6;fontStyle=0;fontColor=black;connectable=0;">
               <mxGeometry
                 x      = "15"
                 y      = "40"
@@ -106,7 +106,7 @@
                     parent = "2"
                     value  = ""
                     edge   = "1"
-                    style  = "html=1;rounded=1;startFill=0;startSize=2;startArrow=none;endFill=1;endSize=2;endArrow=blockThin;sourcePerimeterSpacing=0;">
+                    style  = "html=1;rounded=1;strokeWidth=1;strokeColor=black;startFill=0;startSize=2;startArrow=none;endFill=1;endSize=2;endArrow=blockThin;sourcePerimeterSpacing=0;">
               <mxGeometry width    = "50"
                           height   = "50"
                           relative = "1"
@@ -123,7 +123,7 @@
                     parent = "2"
                     value  = "write_data"
                     vertex = "1"
-                    style  = "text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=6;connectable=0;">
+                    style  = "text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=6;fontStyle=0;fontColor=black;connectable=0;">
               <mxGeometry
                 x      = "15"
                 y      = "50"
@@ -135,7 +135,7 @@
                     parent = "2"
                     value  = ""
                     edge   = "1"
-                    style  = "html=1;rounded=1;startFill=0;startSize=2;startArrow=dash;endFill=1;endSize=2;endArrow=blockThin;sourcePerimeterSpacing=0;">
+                    style  = "html=1;rounded=1;strokeWidth=1;strokeColor=black;startFill=0;startSize=2;startArrow=dash;endFill=1;endSize=2;endArrow=blockThin;sourcePerimeterSpacing=0;">
               <mxGeometry width    = "50"
                           height   = "50"
                           relative = "1"
@@ -152,7 +152,7 @@
                     parent="2"
                     value="read_data"
                     vertex="1"
-                    style="text;html=1;align=right;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=6;connectable=0;">
+                    style="text;html=1;align=right;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=6;fontStyle=0;fontColor=black;connectable=0;">
               <mxGeometry
                 x      = "15"
                 y      = "50"
@@ -164,7 +164,7 @@
                     parent = "2"
                     value  = ""
                     edge   = "1"
-                    style  = "html=1;rounded=1;startFill=0;startSize=2;startArrow=dash;endFill=1;endSize=2;endArrow=none;sourcePerimeterSpacing=0;">
+                    style  = "html=1;rounded=1;strokeWidth=1;strokeColor=black;startFill=0;startSize=2;startArrow=dash;endFill=1;endSize=2;endArrow=none;sourcePerimeterSpacing=0;">
               <mxGeometry width    = "50"
                           height   = "50"
                           relative = "1"
@@ -181,7 +181,7 @@
                     parent = "2"
                     value  = "write_valid"
                     vertex = "1"
-                    style  = "text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=6;connectable=0;">
+                    style  = "text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=6;fontStyle=0;fontColor=black;connectable=0;">
               <mxGeometry
                 x      = "15"
                 y      = "60"
@@ -193,7 +193,7 @@
                     parent = "2"
                     value  = ""
                     edge   = "1"
-                    style  = "html=1;rounded=1;startFill=0;startSize=2;startArrow=none;endFill=1;endSize=2;endArrow=blockThin;sourcePerimeterSpacing=0;">
+                    style  = "html=1;rounded=1;strokeWidth=1;strokeColor=black;startFill=0;startSize=2;startArrow=none;endFill=1;endSize=2;endArrow=blockThin;sourcePerimeterSpacing=0;">
               <mxGeometry width    = "50"
                           height   = "50"
                           relative = "1"
@@ -210,7 +210,7 @@
                     parent="2"
                     value="read_valid"
                     vertex="1"
-                    style="text;html=1;align=right;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=6;connectable=0;">
+                    style="text;html=1;align=right;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=6;fontStyle=0;fontColor=black;connectable=0;">
               <mxGeometry
                 x      = "15"
                 y      = "60"
@@ -222,7 +222,7 @@
                     parent = "2"
                     value  = ""
                     edge   = "1"
-                    style  = "html=1;rounded=1;startFill=0;startSize=2;startArrow=none;endFill=1;endSize=2;endArrow=none;sourcePerimeterSpacing=0;">
+                    style  = "html=1;rounded=1;strokeWidth=1;strokeColor=black;startFill=0;startSize=2;startArrow=none;endFill=1;endSize=2;endArrow=none;sourcePerimeterSpacing=0;">
               <mxGeometry width    = "50"
                           height   = "50"
                           relative = "1"
@@ -239,7 +239,7 @@
                     parent = "2"
                     value  = "write_ready"
                     vertex = "1"
-                    style  = "text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=6;connectable=0;">
+                    style  = "text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=6;fontStyle=0;fontColor=black;connectable=0;">
               <mxGeometry
                 x      = "15"
                 y      = "70"
@@ -251,7 +251,7 @@
                     parent = "2"
                     value  = ""
                     edge   = "1"
-                    style  = "html=1;rounded=1;startFill=0;startSize=2;startArrow=none;endFill=1;endSize=2;endArrow=none;sourcePerimeterSpacing=0;">
+                    style  = "html=1;rounded=1;strokeWidth=1;strokeColor=black;startFill=0;startSize=2;startArrow=none;endFill=1;endSize=2;endArrow=none;sourcePerimeterSpacing=0;">
               <mxGeometry width    = "50"
                           height   = "50"
                           relative = "1"
@@ -268,7 +268,7 @@
                     parent="2"
                     value="read_ready"
                     vertex="1"
-                    style="text;html=1;align=right;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=6;connectable=0;">
+                    style="text;html=1;align=right;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=6;fontStyle=0;fontColor=black;connectable=0;">
               <mxGeometry
                 x      = "15"
                 y      = "70"
@@ -280,7 +280,7 @@
                     parent = "2"
                     value  = ""
                     edge   = "1"
-                    style  = "html=1;rounded=1;startFill=0;startSize=2;startArrow=none;endFill=1;endSize=2;endArrow=blockThin;sourcePerimeterSpacing=0;">
+                    style  = "html=1;rounded=1;strokeWidth=1;strokeColor=black;startFill=0;startSize=2;startArrow=none;endFill=1;endSize=2;endArrow=blockThin;sourcePerimeterSpacing=0;">
               <mxGeometry width    = "50"
                           height   = "50"
                           relative = "1"
@@ -297,7 +297,7 @@
                     parent = "2"
                     value  = "empty"
                     vertex = "1"
-                    style  = "text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=6;connectable=0;">
+                    style  = "text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=6;fontStyle=0;fontColor=black;connectable=0;">
               <mxGeometry
                 x      = "15"
                 y      = "80"
@@ -309,7 +309,7 @@
                     parent = "2"
                     value  = ""
                     edge   = "1"
-                    style  = "html=1;rounded=1;startFill=0;startSize=2;startArrow=none;endFill=1;endSize=2;endArrow=none;sourcePerimeterSpacing=0;">
+                    style  = "html=1;rounded=1;strokeWidth=1;strokeColor=black;startFill=0;startSize=2;startArrow=none;endFill=1;endSize=2;endArrow=none;sourcePerimeterSpacing=0;">
               <mxGeometry width    = "50"
                           height   = "50"
                           relative = "1"
@@ -326,7 +326,7 @@
                     parent="2"
                     value="full"
                     vertex="1"
-                    style="text;html=1;align=right;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=6;connectable=0;">
+                    style="text;html=1;align=right;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=6;fontStyle=0;fontColor=black;connectable=0;">
               <mxGeometry
                 x      = "15"
                 y      = "80"
@@ -338,7 +338,7 @@
                     parent = "2"
                     value  = ""
                     edge   = "1"
-                    style  = "html=1;rounded=1;startFill=0;startSize=2;startArrow=none;endFill=1;endSize=2;endArrow=none;sourcePerimeterSpacing=0;">
+                    style  = "html=1;rounded=1;strokeWidth=1;strokeColor=black;startFill=0;startSize=2;startArrow=none;endFill=1;endSize=2;endArrow=none;sourcePerimeterSpacing=0;">
               <mxGeometry width    = "50"
                           height   = "50"
                           relative = "1"
