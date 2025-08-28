@@ -3,7 +3,7 @@ import argparse
 import importlib.resources
 import yaml
 import collections.abc
-from jinja2 import Environment
+from j2gpp import J2GPP
 from symbol_generator.font_character_widths import font_character_widths
 
 # Function to recursively update a dictionary
@@ -284,24 +284,21 @@ def generate_symbol(input_file_path:str, theme:dict, scale:float):
     + svg_padding * 2
   )
 
-  # Jinja2 environment
-  env = Environment()
+  # J2GPP environment
+  render_engine = J2GPP()
+  render_engine.define_variables(template_variables)
 
   # Load template from package resources
   try:
+    output_path = input_file_path.rsplit('.', 1)[0] + ".svg"
     template_ref = importlib.resources.files('symbol_generator').joinpath('symbol.svg.j2')
-    with importlib.resources.as_file(template_ref) as svg_template_path:
-      with open(svg_template_path, 'r') as svg_template:
-        # Generate output SVG string
-        output_str = env.from_string(svg_template.read()).render(template_variables)
-        # Remove trailing whitespaces from lines
-        output_str = re.sub(r' +\n', '\n', output_str)
-        # Determine output path (e.g., same name as input but with .svg)
-        output_path = input_file_path.rsplit('.', 1)[0] + ".svg"
-        # Write output file
-        with open(output_path, 'w') as output_file:
-          output_file.write(output_str)
+    with importlib.resources.as_file(template_ref) as svg_template_path_object:
+      svg_template_path_string = str(svg_template_path_object)
+      render_results = render_engine.render_file(svg_template_path_string, output_path)
+      if render_results.success:
         print(f"Symbol successfully generated at '{output_path}'.")
+      else:
+        print(f"ERROR: Could not render the symbol for '{input_file_path}': {render_results.error_message}.")
   except FileNotFoundError:
     print(f"ERROR: SVG template file 'symbol.svg.j2' not found in package. Cannot generate symbol for '{input_file_path}'.")
   except Exception as exception:
