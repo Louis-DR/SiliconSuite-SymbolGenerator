@@ -46,7 +46,7 @@ def generate_symbol(input_file_path:str, theme:dict, scale:float):
   box_padding_bottom     = layout_config['box_padding_bottom']
   box_padding_sides      = layout_config['box_padding_sides']
   port_arrow_length      = layout_config['port_arrow_length']
-  svg_padding            = layout_config['svg_padding']
+  image_padding          = layout_config['image_padding']
   arrow_triangle_length  = shapes_config['arrow_triangle_length']
   arrow_triangle_height  = shapes_config['arrow_triangle_height']
   bus_line_distance      = shapes_config['bus_line_distance']
@@ -203,10 +203,10 @@ def generate_symbol(input_file_path:str, theme:dict, scale:float):
   # Box position
   template_variables['box']['x'] = int(
       port_arrow_length
-    + svg_padding
+    + image_padding
   )
   template_variables['box']['y'] = int(
-      svg_padding
+      image_padding
   )
 
   # Title
@@ -277,11 +277,11 @@ def generate_symbol(input_file_path:str, theme:dict, scale:float):
   template_variables['width'] = int(
       template_variables['box']['width']
     + port_arrow_length * 2
-    + svg_padding * 2
+    + image_padding * 2
   )
   template_variables['height'] = int(
       template_variables['box']['height']
-    + svg_padding * 2
+    + image_padding * 2
   )
 
   # J2GPP environment
