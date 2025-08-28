@@ -25,8 +25,25 @@ def update_recursive(dictionary:dict, update:dict) -> dict:
       dictionary[key] = value
   return dictionary
 
-# Function to generate a single symbol SVG
-def generate_symbol(input_file_path:str, theme:dict, scale:float):
+
+
+targets = [
+  {
+    'theme_section': "svg",
+    'template_name': "symbol.svg.j2",
+    'output_extension': ".svg"
+  },
+  {
+    'theme_section': "drawio",
+    'template_name': "symbol.drawio.j2",
+    'output_extension': ".drawio"
+  },
+]
+
+
+
+# Function to generate a single symbol
+def generate_symbol(input_file_path:str, theme:dict, scale:float, target:dict):
   # Read input file
   input_description = None
   try:
@@ -44,6 +61,15 @@ def generate_symbol(input_file_path:str, theme:dict, scale:float):
   font_config   = theme['fonts']
   color_config  = theme['colors']
   shapes_config = theme['shapes']
+
+  # Extract the target-specific config
+  theme_section = target['theme_section']
+  if theme_section in theme:
+    target_config = theme[theme_section]
+    if 'layout' in target_config: layout_config .update( target_config['layout'] )
+    if 'fonts'  in target_config: font_config   .update( target_config['fonts']  )
+    if 'colors' in target_config: color_config  .update( target_config['colors'] )
+    if 'shapes' in target_config: shapes_config .update( target_config['shapes'] )
 
   # Drawing parameters
   title_height           = layout_config['title_height']
@@ -302,22 +328,24 @@ def generate_symbol(input_file_path:str, theme:dict, scale:float):
 
   # Load template from package resources
   try:
-    output_path = input_file_path.rsplit('.', 1)[0] + ".svg"
-    template_ref = importlib.resources.files('symbol_generator').joinpath('symbol.svg.j2')
-    with importlib.resources.as_file(template_ref) as svg_template_path_object:
-      svg_template_path_string = str(svg_template_path_object)
-      render_results = render_engine.render_file(svg_template_path_string, output_path)
+    output_path = input_file_path.rsplit('.', 1)[0] + target['output_extension']
+    template_name = target['template_name']
+    template_ref = importlib.resources.files('symbol_generator').joinpath(template_name)
+    with importlib.resources.as_file(template_ref) as template_path_object:
+      template_path_string = str(template_path_object)
+      render_results = render_engine.render_file(template_path_string, output_path)
       if render_results.success:
         print(f"Symbol successfully generated at '{output_path}'.")
       else:
         print(f"ERROR: Could not render the symbol for '{input_file_path}': {render_results.error_message}.")
   except FileNotFoundError:
-    print(f"ERROR: SVG template file 'symbol.svg.j2' not found in package. Cannot generate symbol for '{input_file_path}'.")
+    print(f"ERROR: {target['theme_section'].capitalize()} template file '{template_name}' not found in package. Cannot generate symbol for '{input_file_path}'.")
   except Exception as exception:
     print(f"ERROR: Failed during template processing or writing for '{input_file_path}': {exception}.")
 
-def main():
 
+
+def main():
   # Parse command line arguments
   argparser = argparse.ArgumentParser(description='Generate the SVG symbol of a hardware component from a description file.')
   argparser.add_argument('input_files', nargs='+', help='Path(s) to the symbol description file(s).') # Changed to input_files, nargs='+'
@@ -375,7 +403,8 @@ def main():
 
   # Process each input file
   for input_file_path in args.input_files:
-    generate_symbol(input_file_path, theme, args.scale)
+    for target in targets:
+      generate_symbol(input_file_path, theme, args.scale, target)
 
 if __name__ == "__main__":
   main()
