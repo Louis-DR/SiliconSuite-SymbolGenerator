@@ -162,8 +162,12 @@ def generate_symbol(input_file_path:str, theme:dict, scale:float, target:dict):
   # Parse the next lines for ports
   template_variables['ports'] = {'left':[], 'right':[]}
   template_variables['number_port_lines'] = 0
-  empty_port = {'label':"", 'direction':"", 'width':""}
-  line_re = re.compile(r"(?:([-=<>]{2,})\s+(\w+))?\s*(?:(\w+)\s+([-=<>]{2,}))?")
+  empty_port  = {'label':"", 'direction':"", 'type':"", 'width':""}
+  arrow_re    =            r"(?:[-=]+(?:\[[^\[\]\n]+\][-=]+)?[<>]|[<>][-=]+(?:\[[^\[\]\n]+\][-=]+)?)"
+  line_re     = re.compile(r"(?:(" + arrow_re + r")\s+(\w+))?\s*(?:(\w+)\s+(" + arrow_re + r"))?")
+  bus_size_re = re.compile(r"\[([^\[\]\n]+)\]")
+  left_width_label_widths  = []
+  right_width_label_widths = []
   while lines:
     template_variables['number_port_lines'] += 1
     line        = lines.pop(0).strip()
@@ -176,25 +180,45 @@ def generate_symbol(input_file_path:str, theme:dict, scale:float, target:dict):
     # Left side ports
     if left_arrow:
       direction = "input" if '>' in left_arrow else "output"
-      width     = "bus"   if '=' in left_arrow else "bit"
+      type      = "bus"   if '=' in left_arrow else "bit"
+      width_match = bus_size_re.search(left_arrow)
+      width     = width_match.group(1) if width_match else ""
       port = {
         'label':     left_label,
         'direction': direction,
+        'type':      type,
         'width':     width
       }
       template_variables['ports']['left'].append(port)
+      if width:
+        left_width_label_widths.append(get_text_width(
+          width,
+          template_variables['fonts']['bus_width']['family'],
+          template_variables['fonts']['bus_width']['weight'],
+          template_variables['fonts']['bus_width']['size']
+        ))
     else:
       template_variables['ports']['left'].append(empty_port)
     # Right side ports
     if right_arrow:
       direction = "input" if '<' in right_arrow else "output"
-      width     = "bus"   if '=' in right_arrow else "bit"
+      type      = "bus"   if '=' in right_arrow else "bit"
+      width_match = bus_size_re.search(right_arrow)
+      width     = width_match.group(1) if width_match else ""
       port = {
         'label':     right_label,
         'direction': direction,
+        'type':      type,
         'width':     width
       }
       template_variables['ports']['right'].append(port)
+      if width:
+        right_width_label_widths.append(get_text_width(
+          width,
+          template_variables['fonts']['bus_width']['family'],
+          template_variables['fonts']['bus_width']['weight'],
+          template_variables['fonts']['bus_width']['size']
+        ))
     else:
       template_variables['ports']['right'].append(empty_port)
     # Line width
