@@ -10,8 +10,9 @@ layout:
   box_padding_top:        2  # Box top padding
   box_padding_bottom:     5  # Box bottom padding
   box_padding_sides:      2  # Box sides padding
-  port_arrow_length:     20  # Length of the port arrows
+  port_arrow_length:     20  # Minimum length of the port arrows
   image_padding:          5  # Padding for the top, bottom, left, and right
+  bus_width_offset:       3  # Distance between port arrow and bus width label
 
 shapes:
   box_border_width:       1  # Width of the box border
@@ -35,6 +36,10 @@ fonts:
     family: "Helvetica" # Font family for ports
     weight: "regular"   # Font weight for ports
     size: 6             # Font size for ports
+  bus_width:
+    family: "Helvetica" # Font family for bus width
+    weight: "regular"   # Font weight for bus width
+    size: 4             # Font size for bus width
 
 colors:
   box_background: "white" # Background fill color of the box
@@ -43,6 +48,7 @@ colors:
   subtitle:       "black" # Subtitle text color
   port_label:     "black" # Port label text color
   port_arrow:     "black" # Port arrow color
+  bus_width:      "black" # Bus width text color
 
 drawio:
   layout:

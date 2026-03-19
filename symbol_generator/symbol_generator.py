@@ -77,6 +77,7 @@ def generate_symbol(input_file_path:str, theme:dict, scale:float, target:dict):
   box_padding_sides      = layout_config['box_padding_sides']
   port_arrow_length      = layout_config['port_arrow_length']
   image_padding          = layout_config['image_padding']
+  bus_width_offset       = layout_config['bus_width_offset']
   arrow_triangle_length  = shapes_config['arrow_triangle_length']
   arrow_triangle_height  = shapes_config['arrow_triangle_height']
   bus_line_distance      = shapes_config['bus_line_distance']
