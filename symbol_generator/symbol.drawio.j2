@@ -145,7 +145,7 @@
                               strokeColor={{colors.port_arrow}};                                              {#- -#}
                               startFill=0;                                                                    {#- -#}
                               startSize=2;                                                                    {#- -#}
-                              startArrow={% if left_port.width == "bus" %}dash{%else%}none{%endif%};          {#- -#}
+                              startArrow={% if left_port.type == "bus" %}dash{%else%}none{%endif%};          {#- -#}
                               endFill=1;                                                                      {#- -#}
                               endSize=2;                                                                      {#- -#}
                               endArrow={% if left_port.direction == "input" %}blockThin{%else%}none{%endif%}; {#- -#}
@@ -154,7 +154,7 @@
                           height   = "50"
                           relative = "1"
                           as       = "geometry">
-                <mxPoint x  = "{{arrows.x_left - arrows.length}}"
+                <mxPoint x  = "{{arrows.x_left - arrows.length_left}}"
                          y  = "{{left_port.y}}"
                          as = "sourcePoint"/>
                 <mxPoint x  = "{{arrows.x_left}}"
@@ -197,7 +197,7 @@
                               strokeColor={{colors.port_arrow}};                                              {#- -#}
                               startFill=0;                                                                     {#- -#}
                               startSize=2;                                                                     {#- -#}
-                              startArrow={% if right_port.width == "bus" %}dash{%else%}none{%endif%};          {#- -#}
+                              startArrow={% if right_port.type == "bus" %}dash{%else%}none{%endif%};          {#- -#}
                               endFill=1;                                                                       {#- -#}
                               endSize=2;                                                                       {#- -#}
                               endArrow={% if right_port.direction == "input" %}blockThin{%else%}none{%endif%}; {#- -#}
@@ -206,7 +206,7 @@
                           height   = "50"
                           relative = "1"
                           as       = "geometry">
-                <mxPoint x  = "{{arrows.x_right + arrows.length}}"
+                <mxPoint x  = "{{arrows.x_right + arrows.length_right}}"
                          y  = "{{right_port.y}}"
                          as = "sourcePoint"/>
                 <mxPoint x  = "{{arrows.x_right}}"
