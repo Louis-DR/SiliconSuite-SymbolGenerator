@@ -163,6 +163,28 @@
               </mxGeometry>
             </mxCell>
           {%- endif %}
+          {%- if left_port.width != "" %}
+            <mxCell id     = "{{left_port.label}}-width"
+                    parent = "2"
+                    value  = "{{left_port.width}}"
+                    vertex = "1"
+                    style  = "text;                                                                 {#- -#}
+                              html=1;                                                               {#- -#}
+                              align=center;                                                         {#- -#}
+                              verticalAlign=middle;                                                 {#- -#}
+                              whiteSpace=nowrap;                                                    {#- -#}
+                              rounded=0;                                                            {#- -#}
+                              fontSize={{fonts.bus_width.size}};                                    {#- -#}
+                              fontStyle={% if fonts.bus_width.weight=="bold" %}1{%else%}0{%endif%}; {#- -#}
+                              fontColor={{colors.bus_width}};                                       {#- -#}
+                              connectable=0;">
+              <mxGeometry x      = "{{arrows.bus_width_x_left}}"
+                          y      = "{{left_port.y - arrows.bus_width_offset}}"
+                          width  = "0"
+                          height = "0"
+                          as     = "geometry"/>
+            </mxCell>
+          {%- endif %}
 
           {%- set right_port = ports.right[port_index] %}
           {%- if right_port.direction != "" %}
@@ -213,6 +235,28 @@
                          y  = "{{right_port.y}}"
                          as = "targetPoint"/>
               </mxGeometry>
+            </mxCell>
+          {%- endif %}
+          {%- if right_port.width != "" %}
+            <mxCell id     = "{{right_port.label}}-width"
+                    parent = "2"
+                    value  = "{{right_port.width}}"
+                    vertex = "1"
+                    style  = "text;                                                                 {#- -#}
+                              html=1;                                                               {#- -#}
+                              align=center;                                                         {#- -#}
+                              verticalAlign=middle;                                                 {#- -#}
+                              whiteSpace=nowrap;                                                    {#- -#}
+                              rounded=0;                                                            {#- -#}
+                              fontSize={{fonts.bus_width.size}};                                    {#- -#}
+                              fontStyle={% if fonts.bus_width.weight=="bold" %}1{%else%}0{%endif%}; {#- -#}
+                              fontColor={{colors.bus_width}};                                       {#- -#}
+                              connectable=0;">
+              <mxGeometry x      = "{{arrows.bus_width_x_right}}"
+                          y      = "{{right_port.y - arrows.bus_width_offset}}"
+                          width  = "0"
+                          height = "0"
+                          as     = "geometry"/>
             </mxCell>
           {%- endif %}
 
