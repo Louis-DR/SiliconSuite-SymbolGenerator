@@ -239,6 +239,12 @@ def generate_symbol(input_file_path:str, theme:dict, scale:float, target:dict):
                     )
     line_widths.append(line_width)
 
+  # Arrow lengths per side based on minimum length and bus width labels
+  max_left_width_label_width  = max(left_width_label_widths)  if left_width_label_widths  else 0
+  max_right_width_label_width = max(right_width_label_widths) if right_width_label_widths else 0
+  left_arrow_length  = max(port_arrow_length, arrow_triangle_length + bus_width_offset + max_left_width_label_width  + bus_width_offset)
+  right_arrow_length = max(port_arrow_length, arrow_triangle_length + bus_width_offset + max_right_width_label_width + bus_width_offset)
+
   # Box dimensions
   template_variables['box'] = {}
   template_variables['box']['width'] = ceil(int(
@@ -257,7 +263,7 @@ def generate_symbol(input_file_path:str, theme:dict, scale:float, target:dict):
 
   # Box position
   template_variables['box']['x'] = int(
-      port_arrow_length
+      left_arrow_length
     + image_padding
   )
   template_variables['box']['y'] = int(
@@ -286,7 +292,18 @@ def generate_symbol(input_file_path:str, theme:dict, scale:float, target:dict):
 
   # Position of the arrows
   template_variables['arrows'] = {}
-  template_variables['arrows']['length'] = port_arrow_length
+  template_variables['arrows']['length_left']  = left_arrow_length
+  template_variables['arrows']['length_right'] = right_arrow_length
+  template_variables['arrows']['bus_width_offset'] = bus_width_offset
+  template_variables['arrows']['bus_width_x_left'] = int(
+      template_variables['box']['x']
+    - left_arrow_length / 2
+  )
+  template_variables['arrows']['bus_width_x_right'] = int(
+      template_variables['box']['x']
+    + template_variables['box']['width']
+    + right_arrow_length / 2
+  )
   template_variables['arrows']['x_left'] = int(
       template_variables['box']['x']
   )
@@ -331,7 +348,8 @@ def generate_symbol(input_file_path:str, theme:dict, scale:float, target:dict):
   # SVG dimensions
   template_variables['width'] = int(
       template_variables['box']['width']
-    + port_arrow_length * 2
+    + left_arrow_length
+    + right_arrow_length
     + image_padding * 2
   )
   template_variables['height'] = int(
