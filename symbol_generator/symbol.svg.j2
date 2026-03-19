@@ -14,12 +14,18 @@
           {%- set busline_x = arrows.x_left - arrows.length_left + arrows.busline.distance %}
           <line x1="{{busline_x - arrows.busline.size}}" y1="{{left_port.y - arrows.busline.size}}" x2="{{busline_x + arrows.busline.size}}" y2="{{left_port.y + arrows.busline.size}}" stroke="{{colors.port_arrow}}" stroke-width="{{shapes.arrow_line_width}}"/>
         {%- endif %}
+        {%- if left_port.width != "" %}
+          <text x="{{arrows.bus_width_x_left}}" y="{{left_port.y - arrows.bus_width_offset}}" text-anchor="middle" dominant-baseline="middle" font-family="{{fonts.bus_width.family}}" font-size="{{fonts.bus_width.size}}" font-weight="{{fonts.bus_width.weight}}" fill="{{colors.bus_width}}">{{left_port.width}}</text>
+        {%- endif %}
       {%- else %}
         <line x1="{{arrows.x_left}}" y1="{{left_port.y}}" x2="{{arrows.x_left - arrows.length_left + arrows.triangle.length}}" y2="{{left_port.y}}" stroke="{{colors.port_arrow}}" stroke-width="{{shapes.arrow_line_width}}"/>
         <path d="M {{arrows.x_left - arrows.length_left}} {{left_port.y}} {{arrows.triangle.left_path}}" fill="{{colors.port_arrow}}"/>
         {%- if left_port.type == "bus" %}
           {%- set busline_x = arrows.x_left - arrows.busline.distance %}
           <line x1="{{busline_x - arrows.busline.size}}" y1="{{left_port.y - arrows.busline.size}}" x2="{{busline_x + arrows.busline.size}}" y2="{{left_port.y + arrows.busline.size}}" stroke="{{colors.port_arrow}}" stroke-width="{{shapes.arrow_line_width}}"/>
+        {%- endif %}
+        {%- if left_port.width != "" %}
+          <text x="{{arrows.bus_width_x_left}}" y="{{left_port.y - arrows.bus_width_offset}}" text-anchor="middle" dominant-baseline="middle" font-family="{{fonts.bus_width.family}}" font-size="{{fonts.bus_width.size}}" font-weight="{{fonts.bus_width.weight}}" fill="{{colors.bus_width}}">{{left_port.width}}</text>
         {%- endif %}
       {%- endif %}
     {%- endif %}
@@ -34,12 +40,18 @@
           {%- set busline_x = arrows.x_right + arrows.busline.distance %}
           <line x1="{{busline_x - arrows.busline.size}}" y1="{{right_port.y - arrows.busline.size}}" x2="{{busline_x + arrows.busline.size}}" y2="{{right_port.y + arrows.busline.size}}" stroke="{{colors.port_arrow}}" stroke-width="{{shapes.arrow_line_width}}"/>
         {%- endif %}
+        {%- if right_port.width != "" %}
+          <text x="{{arrows.bus_width_x_right}}" y="{{right_port.y - arrows.bus_width_offset}}" text-anchor="middle" dominant-baseline="middle" font-family="{{fonts.bus_width.family}}" font-size="{{fonts.bus_width.size}}" font-weight="{{fonts.bus_width.weight}}" fill="{{colors.bus_width}}">{{right_port.width}}</text>
+        {%- endif %}
       {%- else %}
         <line x1="{{arrows.x_right + arrows.triangle.length}}" y1="{{right_port.y}}" x2="{{arrows.x_right + arrows.length_right}}" y2="{{right_port.y}}" stroke="{{colors.port_arrow}}" stroke-width="{{shapes.arrow_line_width}}"/>
         <path d="M {{arrows.x_right}} {{right_port.y}} {{arrows.triangle.left_path}}" fill="{{colors.port_arrow}}"/>
         {%- if right_port.type == "bus" %}
           {%- set busline_x = arrows.x_right + arrows.length_right - arrows.busline.distance %}
           <line x1="{{busline_x - arrows.busline.size}}" y1="{{right_port.y - arrows.busline.size}}" x2="{{busline_x + arrows.busline.size}}" y2="{{right_port.y + arrows.busline.size}}" stroke="{{colors.port_arrow}}" stroke-width="{{shapes.arrow_line_width}}"/>
+        {%- endif %}
+        {%- if right_port.width != "" %}
+          <text x="{{arrows.bus_width_x_right}}" y="{{right_port.y - arrows.bus_width_offset}}" text-anchor="middle" dominant-baseline="middle" font-family="{{fonts.bus_width.family}}" font-size="{{fonts.bus_width.size}}" font-weight="{{fonts.bus_width.weight}}" fill="{{colors.bus_width}}">{{right_port.width}}</text>
         {%- endif %}
       {%- endif %}
     {%- endif %}
