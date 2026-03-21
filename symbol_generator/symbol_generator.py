@@ -76,6 +76,7 @@ def generate_symbol(input_file_path:str, theme:dict, scale:float, target:dict):
   box_padding_bottom     = layout_config['box_padding_bottom']
   box_padding_sides      = layout_config['box_padding_sides']
   port_arrow_length      = layout_config['port_arrow_length']
+  port_arrow_quanta      = layout_config['port_arrow_quanta']
   image_padding          = layout_config['image_padding']
   line_label_margin      = layout_config['line_label_margin']
   line_label_distance    = layout_config['line_label_distance']
@@ -243,8 +244,8 @@ def generate_symbol(input_file_path:str, theme:dict, scale:float, target:dict):
   # Arrow lengths per side based on minimum length and bus width labels
   max_left_width_label_width  = max(left_width_label_widths)  if left_width_label_widths  else 0
   max_right_width_label_width = max(right_width_label_widths) if right_width_label_widths else 0
-  left_arrow_length  = max(port_arrow_length, arrow_triangle_length + line_label_margin + max_left_width_label_width  + line_label_margin)
-  right_arrow_length = max(port_arrow_length, arrow_triangle_length + line_label_margin + max_right_width_label_width + line_label_margin)
+  left_arrow_length  = ceil(int(max(port_arrow_length, arrow_triangle_length + line_label_margin + max_left_width_label_width  + line_label_margin)), port_arrow_quanta)
+  right_arrow_length = ceil(int(max(port_arrow_length, arrow_triangle_length + line_label_margin + max_right_width_label_width + line_label_margin)), port_arrow_quanta)
 
   # Box dimensions
   template_variables['box'] = {}

@@ -11,6 +11,7 @@ layout:
   box_padding_bottom:     5  # Box bottom padding
   box_padding_sides:      2  # Box sides padding
   port_arrow_length:     20  # Minimum length of the port arrows
+  port_arrow_quanta:      1  # Multiple of which the port arrow length must be
   image_padding:          5  # Padding for the top, bottom, left, and right
   line_label_margin:      4  # Margin on horizontal sides of the label
   line_label_distance:    3  # Distance between port arrow and bus width label
@@ -56,5 +57,6 @@ drawio:
   layout:
     box_width_quanta:    10
     box_height_quanta:   10
+    port_arrow_quanta:   10
     port_arrow_length:   15
     image_padding:        0
