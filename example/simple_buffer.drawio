@@ -11,7 +11,7 @@
                   fold       = "1"
                   page       = "1"
                   pageScale  = "1"
-                  pageWidth  = "132"
+                  pageWidth  = "140"
                   pageHeight = "90"
                   math       = "0"
                   shadow     = "0">
@@ -23,8 +23,8 @@
                 value       = ""
                 vertex      = "1"
                 connectable = "0"
-                style       = "group;connectable=1;points=[[0,0,0,26,0],[0,0,0,36,0],[0,0,0,26,10],[1,0,0,-26,0],[1,0,0,-36,0],[1,0,0,-26,10],[0,0,0,0,30],[0,0,0,0,40],[0,0,0,0,50],[1,0,0,0,50],[0,0,0,0,60],[1,0,0,0,60],[0,0,0,0,70],[1,0,0,0,70],[0,0,0,0,80],[1,0,0,0,80],[0.5,0,0,0,0],[0.5,0,0,0,90]];">
-          <mxGeometry width  = "132"
+                style       = "group;connectable=1;points=[[0,0,0,30,0],[0,0,0,40,0],[0,0,0,30,10],[1,0,0,-30,0],[1,0,0,-40,0],[1,0,0,-30,10],[0,0,0,0,30],[0,0,0,0,40],[0,0,0,0,50],[1,0,0,0,50],[0,0,0,0,60],[1,0,0,0,60],[0,0,0,0,70],[1,0,0,0,70],[0,0,0,0,80],[1,0,0,0,80],[0.5,0,0,0,0],[0.5,0,0,0,90]];">
+          <mxGeometry width  = "140"
                       height = "90"
                       as     = "geometry"/>
         </mxCell>
@@ -33,7 +33,7 @@
                 value  = ""
                 vertex = "1"
                 style  = "rounded=1;arcSize=5;fillColor=white;strokeWidth=1;strokeColor=black;whiteSpace=wrap;html=1;connectable=0;">
-          <mxGeometry x="26"
+          <mxGeometry x="30"
                       y="0"
                       width="80"
                       height="90"
@@ -44,7 +44,7 @@
                 value  = "Simple Buffer"
                 vertex = "1"
                 style  = "text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=8;fontStyle=1;fontColor=black;connectable=0;">
-          <mxGeometry x      = "26"
+          <mxGeometry x      = "30"
                       y      = "7"
                       width  = "80"
                       height = "0"
@@ -55,7 +55,7 @@
                 value  = "valid_ready_simple_buffer"
                 vertex = "1"
                 style  = "text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=6;fontStyle=0;fontColor=black;connectable=0;">
-          <mxGeometry x      = "26"
+          <mxGeometry x      = "30"
                       y      = "16"
                       width  = "80"
                       height = "0"
@@ -67,7 +67,7 @@
                     vertex = "1"
                     style  = "text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=6;fontStyle=0;fontColor=black;connectable=0;">
               <mxGeometry
-                x      = "26"
+                x      = "30"
                 y      = "30"
                 width  = "80"
                 height = "0"
@@ -85,7 +85,7 @@
                 <mxPoint x  = "0"
                          y  = "30"
                          as = "sourcePoint"/>
-                <mxPoint x  = "26"
+                <mxPoint x  = "30"
                          y  = "30"
                          as = "targetPoint"/>
               </mxGeometry>
@@ -96,7 +96,7 @@
                     vertex = "1"
                     style  = "text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=6;fontStyle=0;fontColor=black;connectable=0;">
               <mxGeometry
-                x      = "26"
+                x      = "30"
                 y      = "40"
                 width  = "80"
                 height = "0"
@@ -114,7 +114,7 @@
                 <mxPoint x  = "0"
                          y  = "40"
                          as = "sourcePoint"/>
-                <mxPoint x  = "26"
+                <mxPoint x  = "30"
                          y  = "40"
                          as = "targetPoint"/>
               </mxGeometry>
@@ -125,7 +125,7 @@
                     vertex = "1"
                     style  = "text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=6;fontStyle=0;fontColor=black;connectable=0;">
               <mxGeometry
-                x      = "26"
+                x      = "30"
                 y      = "50"
                 width  = "80"
                 height = "0"
@@ -143,7 +143,7 @@
                 <mxPoint x  = "0"
                          y  = "50"
                          as = "sourcePoint"/>
-                <mxPoint x  = "26"
+                <mxPoint x  = "30"
                          y  = "50"
                          as = "targetPoint"/>
               </mxGeometry>
@@ -153,7 +153,7 @@
                     value  = "WIDTH"
                     vertex = "1"
                     style  = "text;html=1;align=center;verticalAlign=middle;whiteSpace=nowrap;rounded=0;fontSize=4;fontStyle=0;fontColor=black;connectable=0;">
-              <mxGeometry x      = "13"
+              <mxGeometry x      = "15"
                           y      = "47"
                           width  = "0"
                           height = "0"
@@ -165,7 +165,7 @@
                     vertex="1"
                     style="text;html=1;align=right;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=6;fontStyle=0;fontColor=black;connectable=0;">
               <mxGeometry
-                x      = "26"
+                x      = "30"
                 y      = "50"
                 width  = "80"
                 height = "0"
@@ -180,10 +180,10 @@
                           height   = "50"
                           relative = "1"
                           as       = "geometry">
-                <mxPoint x  = "132"
+                <mxPoint x  = "140"
                          y  = "50"
                          as = "sourcePoint"/>
-                <mxPoint x  = "106"
+                <mxPoint x  = "110"
                          y  = "50"
                          as = "targetPoint"/>
               </mxGeometry>
@@ -193,7 +193,7 @@
                     value  = "WIDTH"
                     vertex = "1"
                     style  = "text;html=1;align=center;verticalAlign=middle;whiteSpace=nowrap;rounded=0;fontSize=4;fontStyle=0;fontColor=black;connectable=0;">
-              <mxGeometry x      = "119"
+              <mxGeometry x      = "125"
                           y      = "47"
                           width  = "0"
                           height = "0"
@@ -205,7 +205,7 @@
                     vertex = "1"
                     style  = "text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=6;fontStyle=0;fontColor=black;connectable=0;">
               <mxGeometry
-                x      = "26"
+                x      = "30"
                 y      = "60"
                 width  = "80"
                 height = "0"
@@ -223,7 +223,7 @@
                 <mxPoint x  = "0"
                          y  = "60"
                          as = "sourcePoint"/>
-                <mxPoint x  = "26"
+                <mxPoint x  = "30"
                          y  = "60"
                          as = "targetPoint"/>
               </mxGeometry>
@@ -234,7 +234,7 @@
                     vertex="1"
                     style="text;html=1;align=right;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=6;fontStyle=0;fontColor=black;connectable=0;">
               <mxGeometry
-                x      = "26"
+                x      = "30"
                 y      = "60"
                 width  = "80"
                 height = "0"
@@ -249,10 +249,10 @@
                           height   = "50"
                           relative = "1"
                           as       = "geometry">
-                <mxPoint x  = "132"
+                <mxPoint x  = "140"
                          y  = "60"
                          as = "sourcePoint"/>
-                <mxPoint x  = "106"
+                <mxPoint x  = "110"
                          y  = "60"
                          as = "targetPoint"/>
               </mxGeometry>
@@ -263,7 +263,7 @@
                     vertex = "1"
                     style  = "text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=6;fontStyle=0;fontColor=black;connectable=0;">
               <mxGeometry
-                x      = "26"
+                x      = "30"
                 y      = "70"
                 width  = "80"
                 height = "0"
@@ -281,7 +281,7 @@
                 <mxPoint x  = "0"
                          y  = "70"
                          as = "sourcePoint"/>
-                <mxPoint x  = "26"
+                <mxPoint x  = "30"
                          y  = "70"
                          as = "targetPoint"/>
               </mxGeometry>
@@ -292,7 +292,7 @@
                     vertex="1"
                     style="text;html=1;align=right;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=6;fontStyle=0;fontColor=black;connectable=0;">
               <mxGeometry
-                x      = "26"
+                x      = "30"
                 y      = "70"
                 width  = "80"
                 height = "0"
@@ -307,10 +307,10 @@
                           height   = "50"
                           relative = "1"
                           as       = "geometry">
-                <mxPoint x  = "132"
+                <mxPoint x  = "140"
                          y  = "70"
                          as = "sourcePoint"/>
-                <mxPoint x  = "106"
+                <mxPoint x  = "110"
                          y  = "70"
                          as = "targetPoint"/>
               </mxGeometry>
@@ -321,7 +321,7 @@
                     vertex = "1"
                     style  = "text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=6;fontStyle=0;fontColor=black;connectable=0;">
               <mxGeometry
-                x      = "26"
+                x      = "30"
                 y      = "80"
                 width  = "80"
                 height = "0"
@@ -339,7 +339,7 @@
                 <mxPoint x  = "0"
                          y  = "80"
                          as = "sourcePoint"/>
-                <mxPoint x  = "26"
+                <mxPoint x  = "30"
                          y  = "80"
                          as = "targetPoint"/>
               </mxGeometry>
@@ -350,7 +350,7 @@
                     vertex="1"
                     style="text;html=1;align=right;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=6;fontStyle=0;fontColor=black;connectable=0;">
               <mxGeometry
-                x      = "26"
+                x      = "30"
                 y      = "80"
                 width  = "80"
                 height = "0"
@@ -365,10 +365,10 @@
                           height   = "50"
                           relative = "1"
                           as       = "geometry">
-                <mxPoint x  = "132"
+                <mxPoint x  = "140"
                          y  = "80"
                          as = "sourcePoint"/>
-                <mxPoint x  = "106"
+                <mxPoint x  = "110"
                          y  = "80"
                          as = "targetPoint"/>
               </mxGeometry>
