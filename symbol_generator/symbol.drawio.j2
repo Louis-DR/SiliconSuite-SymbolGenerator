@@ -174,12 +174,12 @@
                               verticalAlign=middle;                                                 {#- -#}
                               whiteSpace=nowrap;                                                    {#- -#}
                               rounded=0;                                                            {#- -#}
-                              fontSize={{fonts.bus_width.size}};                                    {#- -#}
-                              fontStyle={% if fonts.bus_width.weight=="bold" %}1{%else%}0{%endif%}; {#- -#}
-                              fontColor={{colors.bus_width}};                                       {#- -#}
+                              fontSize={{fonts.line_label.size}};                                    {#- -#}
+                              fontStyle={% if fonts.line_label.weight=="bold" %}1{%else%}0{%endif%}; {#- -#}
+                              fontColor={{colors.line_label}};                                       {#- -#}
                               connectable=0;">
-              <mxGeometry x      = "{{arrows.bus_width_x_left}}"
-                          y      = "{{left_port.y - arrows.bus_width_offset}}"
+              <mxGeometry x      = "{{arrows.line_label_x_left}}"
+                          y      = "{{left_port.y - arrows.line_label_distance}}"
                           width  = "0"
                           height = "0"
                           as     = "geometry"/>
@@ -248,12 +248,12 @@
                               verticalAlign=middle;                                                 {#- -#}
                               whiteSpace=nowrap;                                                    {#- -#}
                               rounded=0;                                                            {#- -#}
-                              fontSize={{fonts.bus_width.size}};                                    {#- -#}
-                              fontStyle={% if fonts.bus_width.weight=="bold" %}1{%else%}0{%endif%}; {#- -#}
-                              fontColor={{colors.bus_width}};                                       {#- -#}
+                              fontSize={{fonts.line_label.size}};                                    {#- -#}
+                              fontStyle={% if fonts.line_label.weight=="bold" %}1{%else%}0{%endif%}; {#- -#}
+                              fontColor={{colors.line_label}};                                       {#- -#}
                               connectable=0;">
-              <mxGeometry x      = "{{arrows.bus_width_x_right}}"
-                          y      = "{{right_port.y - arrows.bus_width_offset}}"
+              <mxGeometry x      = "{{arrows.line_label_x_right}}"
+                          y      = "{{right_port.y - arrows.line_label_distance}}"
                           width  = "0"
                           height = "0"
                           as     = "geometry"/>
